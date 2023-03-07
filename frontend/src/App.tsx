@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Student } from "models/student";
+import { Student } from "./models/student";
 
 function App() {
   const [students, setStudents] = useState<Student[]>([]);
@@ -8,7 +8,7 @@ function App() {
   useEffect(() => {
     async function loadStudents() {
       try {
-        const response = await fetch("http://localhost:5001/api/v1/academic", {
+        const response = await fetch("/api/v1/academic", {
           method: "GET",
         });
         const students = await response.json();

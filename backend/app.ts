@@ -1,36 +1,20 @@
-import bodyParser from "body-parser";
-import cors from "cors";
 import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
-import helmet from "helmet";
+import createHttpError, { isHttpError } from "http-errors";
 import morgan from "morgan";
 import academicRoutes from "./routes/academic";
-import createHttpError, { isHttpError } from "http-errors";
-// import {
-//   default as academicRoutes,
-//   default as configurationRoutes,
-//   default as facultyRoutes,
-// } from "./routes/academic";
-// import Student from "./models/student";
 
-/* Data Imports */
-
-/* Configuration */
+/* Loads .env file contents into process.env. */
 dotenv.config();
-const app = express();
-app.use(express.json());
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(morgan("dev"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
 
-/* Routes */
-// app.use("/api/v1/academic", academicRoutes);
-// app.use("/faculty", facultyRoutes);
-// app.use("/configuration", configurationRoutes);
-// app.use("*", (req, res) => res.status(404).json({ error: "Not Found" }));
+/* Creates an Express application. The express() function is a top-level function exported by the express module. */
+const app = express();
+
+/* Returns middleware that only parses json and only looks at requests where the Content-Type header matches the type option. */
+app.use(express.json());
+
+/* Concise output colored by response status for development use. The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes. :method :url :status :response-time ms - :res[content-length] */
+app.use(morgan("dev"));
 
 /* API Endpoints */
 
