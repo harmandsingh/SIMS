@@ -3,14 +3,14 @@ import * as AcademicController from "../controllers/academic";
 
 const router = express.Router();
 
-router.get("/", AcademicController.getStudents);
+router.get("/student", AcademicController.getStudents);
 
-router.get("/:studentId", AcademicController.getStudent);
+router.get("/student/:studentId", AcademicController.getStudent);
 
-router.post("/", AcademicController.createStudent);
+router.post("/student", AcademicController.createStudent);
 
-router.patch("/:studentId", AcademicController.updateStudent);
+router.patch("/student/:studentId", AcademicController.updateStudent);
 
-router.delete("/:studentId", AcademicController.deleteStudent);
+router.delete("/student/:studentId", AcademicController.deleteStudent);
 
 export default router;
