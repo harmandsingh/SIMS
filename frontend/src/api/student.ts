@@ -31,8 +31,26 @@ export interface StudentInput {
 }
 
 export async function createStudent(student: StudentInput): Promise<Student> {
-  const response = await fetchData("/api/v1/academic", {
+  const response = await fetchData("/api/v1/academic/student", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(student),
+  });
+  return response.json();
+}
+
+export async function deleteStudent(studentId: string) {
+  await fetchData("/api/v1/academic/student", { method: "DELETE" });
+}
+
+export async function updateNote(
+  studentId: string,
+  student: StudentInput
+): Promise<Student> {
+  const response = await fetchData("/api/v1/academic/student" + studentId, {
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },

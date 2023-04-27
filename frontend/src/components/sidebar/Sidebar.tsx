@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRightOutlined } from "@mui/icons-material";
 import {
   Box,
   Drawer,
@@ -13,7 +14,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "../FlexBetween";
-import { ChevronLeft, ChevronRightOutlined } from "@mui/icons-material";
 import { sidebarItems } from "./SidebarItems";
 
 interface SidebarProps {
@@ -73,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               </FlexBetween>
             </Box>
             <List>
-              {sidebarItems.map(({ text, icon }) => {
+              {sidebarItems.map(({ category, text, icon }) => {
                 if (!icon) {
                   return (
                     <Typography
@@ -86,33 +86,40 @@ const Sidebar: React.FC<SidebarProps> = ({
                     </Typography>
                   );
                 }
-                const lcText = text.toLowerCase();
+
+                let route = "";
+
+                if (category) {
+                  route = category.toLowerCase() + "/" + text.toLowerCase();
+                } else {
+                  route = text.toLowerCase();
+                }
 
                 return (
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        navigate(`/${lcText}`);
-                        setActive(lcText);
+                        navigate(route);
+                        setActive(route);
                       }}
                       sx={{
                         backgroundColor:
-                          active === lcText
+                          active === route
                             ? theme.palette.secondary.main
                             : "transparent",
-                        color: active === lcText ? "#191F45" : "#ffedc2",
+                        color: active === route ? "#191F45" : "#ffedc2",
                       }}
                     >
                       <ListItemIcon
                         sx={{
                           ml: "1rem",
-                          color: active === lcText ? "#191F45" : "#ffedc2",
+                          color: active === route ? "#191F45" : "#ffedc2",
                         }}
                       >
                         {icon}
                       </ListItemIcon>
                       <ListItemText primary={text} />
-                      {active === lcText && (
+                      {active === route && (
                         <ChevronRightOutlined sx={{ ml: "auto" }} />
                       )}
                     </ListItemButton>

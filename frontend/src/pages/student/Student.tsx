@@ -1,10 +1,11 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import * as StudentApi from "../../api/student";
 import { studentState } from "../../atoms/studentsAtom";
 import Header from "../../components/Header";
+import AddStudent from "./AddStudent";
 
 const columns: GridColDef[] = [
   { field: "_id", headerName: "ID", flex: 1 },
@@ -18,6 +19,7 @@ const Student = () => {
   const theme = useTheme();
   const [students, setStudents] = useRecoilState(studentState);
   const [isLoading, setIsLoading] = useState(false);
+  const [showAddStudentDialog, setShowAddStudentDialog] = useState(false);
 
   useEffect(() => {
     async function loadStudents() {
@@ -33,11 +35,19 @@ const Student = () => {
     }
     loadStudents();
     setIsLoading(false);
-  }, [setStudents]);
+  }, []);
 
   return (
     <Box m="1rem 2.5rem">
       <Header title="Students" subtitle="Currently Enrolled Students" />
+      <Button
+        variant="contained"
+        onClick={() => {
+          setShowAddStudentDialog(true);
+        }}
+      >
+        Add New Student
+      </Button>
       <Box
         mt="40px"
         height="75vh"
@@ -73,6 +83,18 @@ const Student = () => {
           rows={students.students || []}
         />
       </Box>
+      {showAddStudentDialog && (
+        <AddStudent
+          onDismiss={() => setShowAddStudentDialog(false)}
+          onAddStudent={(newStudent) => {
+            setStudents((prev) => ({
+              ...prev,
+              students: [...students.students, newStudent],
+            }));
+            setShowAddStudentDialog(false);
+          }}
+        />
+      )}
     </Box>
   );
 };

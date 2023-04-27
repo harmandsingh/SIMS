@@ -14,6 +14,7 @@ export const sidebarItems = [
     text: "Academic",
   },
   {
+    category: "Academic",
     text: "Student",
     icon: <SchoolOutlined />,
   },
