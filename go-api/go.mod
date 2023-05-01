@@ -17,6 +17,7 @@ require (
 	github.com/go-playground/validator v9.31.0+incompatible // indirect
 	github.com/gofiber/fiber/v2 v2.44.0 // indirect
 	github.com/gohugoio/hugo v0.111.3 // indirect
+	github.com/golang-jwt/jwt/v5 v5.0.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/imdario/mergo v0.3.15 // indirect

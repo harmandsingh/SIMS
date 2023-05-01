@@ -1,6 +1,10 @@
 package controllers
 
 import (
+	"encoding/hex"
+	"errors"
+	"fmt"
+	"go-mongo-api/auth"
 	"go-mongo-api/config"
 	"go-mongo-api/models"
 	"go-mongo-api/utils"
@@ -10,7 +14,9 @@ import (
 
 	"github.com/asaskevich/govalidator"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // Register input struct
@@ -123,5 +129,36 @@ func Login(c *fiber.Ctx) error{
 		})
 	}
 
+	token, err := auth.NewToken(hex.EncodeToString([]byte(user.ID)))
+	if err != nil {
+		log.Printf("%s signin failed: %v\n", input.Email, err.Error())
+		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"user": user,
+		"token": fmt.Sprintf("Bearer %s", token),
+	})
+}
+
+func GetUser(c *fiber.Ctx) error {
 	return nil
+}
+
+func AuthRequestWithId(c *fiber.Ctx) (*jwt.MapClaims, error){
+	id := c.Params("id")
+	if !primitive.IsValidObjectID(id){
+		return nil, errors.New("unauthorized")
+	}
+	token := c.Locals("user").(*jwt.Token)
+	payload, err := auth.ParseToken(token.Raw)
+	if err != nil {
+		return nil, err
+	}
+	if payload.ID != id || payload.Issuer != id {
+		return nil, errors.New("unauthorized")
+	}
+	return payload, nil
 }
