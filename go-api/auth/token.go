@@ -1,10 +1,11 @@
 package auth
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"time"
+
+	"go-api/utils"
 
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -41,7 +42,7 @@ func ParseToken(tokenString string) (*jwt.RegisteredClaims, error){
 	var ok bool
 	claims, ok = token.Claims.(*jwt.RegisteredClaims)
 	if !ok || !token.Valid {
-		return nil, errors.New("invalid auth token")
+		return nil, utils.ErrInvalidAuthToken
 	}
 	return claims, nil
 }

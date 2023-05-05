@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"go-mongo-api/config"
-	"go-mongo-api/models"
+	"go-api/config"
+	"go-api/models"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"

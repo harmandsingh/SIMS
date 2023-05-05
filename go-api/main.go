@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go-mongo-api/config"
-	"go-mongo-api/routes"
+	"go-api/config"
+	"go-api/routes"
 	"os"
 
 	"github.com/gofiber/fiber/v2"

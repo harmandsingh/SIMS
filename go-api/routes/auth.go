@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"go-mongo-api/controllers"
+	"go-api/controllers"
 
 	"github.com/gofiber/fiber/v2"
 )
