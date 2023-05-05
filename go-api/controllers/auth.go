@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"encoding/hex"
 	"errors"
 	"fmt"
 	"go-mongo-api/auth"
@@ -129,7 +128,7 @@ func Login(c *fiber.Ctx) error{
 		})
 	}
 
-	token, err := auth.NewToken(hex.EncodeToString([]byte(user.ID)))
+	token, err := auth.NewToken(user.ID.Hex())
 	if err != nil {
 		log.Printf("%s signin failed: %v\n", input.Email, err.Error())
 		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
@@ -147,7 +146,7 @@ func GetUser(c *fiber.Ctx) error {
 	return nil
 }
 
-func AuthRequestWithId(c *fiber.Ctx) (*jwt.MapClaims, error){
+func AuthRequestWithId(c *fiber.Ctx) (*jwt.RegisteredClaims, error){
 	id := c.Params("id")
 	if !primitive.IsValidObjectID(id){
 		return nil, errors.New("unauthorized")
@@ -157,7 +156,10 @@ func AuthRequestWithId(c *fiber.Ctx) (*jwt.MapClaims, error){
 	if err != nil {
 		return nil, err
 	}
-	if payload.ID != id || payload.Issuer != id {
+
+	issuer, _ := payload.GetIssuer()
+
+	if issuer != id {
 		return nil, errors.New("unauthorized")
 	}
 	return payload, nil

@@ -15,11 +15,11 @@ var (
 )
 
 func NewToken(userId string) (string, error) {
-	claims := jwt.MapClaims{
-		"ID": userId,
-		"Issuer": userId,
-		"IssuedAt": time.Now().Unix(),
-		"ExpiresAt": time.Now().Add(time.Minute * 30).Unix(),
+	claims := jwt.RegisteredClaims{
+		ID: userId,
+		Issuer: userId,
+		IssuedAt: jwt.NewNumericDate(time.Now()),
+		ExpiresAt: jwt.NewNumericDate(time.Now().Add(30 * time.Minute)),
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(JwtSecretKey)
@@ -32,14 +32,14 @@ func validateSignedMethod(token *jwt.Token) (interface{}, error){
 	return JwtSecretKey, nil
 }
 
-func ParseToken(tokenString string) (*jwt.MapClaims, error){
-	claims := new(jwt.MapClaims)
+func ParseToken(tokenString string) (*jwt.RegisteredClaims, error){
+	claims := new(jwt.RegisteredClaims)
 	token, err := jwt.ParseWithClaims(tokenString, claims, validateSignedMethod)
 	if err != nil {
 		return nil, err
 	}
 	var ok bool
-	claims, ok = token.Claims.(*jwt.MapClaims)
+	claims, ok = token.Claims.(*jwt.RegisteredClaims)
 	if !ok || !token.Valid {
 		return nil, errors.New("invalid auth token")
 	}
