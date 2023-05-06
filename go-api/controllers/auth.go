@@ -82,7 +82,13 @@ func Register(c *fiber.Ctx) error{
 		})
 	}
 
-	result, err := collection.InsertOne(c.Context(), newUser)
+	// User object to be inserted into the DB
+	userDB := new(models.User)
+	userDB.Username = newUser.Username
+	userDB.Email = newUser.Email
+	userDB.Password = newUser.Password
+
+	result, err := collection.InsertOne(c.Context(), userDB)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"error": "error creating user",
@@ -142,8 +148,31 @@ func Login(c *fiber.Ctx) error{
 	})
 }
 
-func GetUser(c *fiber.Ctx) error {
-	return nil
+func GetUsers(c *fiber.Ctx) error {
+	collection := config.GetDBCollection("users")
+
+	// find all students
+	users := make([]models.User, 0)
+	cursor, err := collection.Find(c.Context(), bson.M{})
+	if err != nil{
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	// iterate over the cursor
+	for cursor.Next(c.Context()){
+		user := models.User{}
+		err := cursor.Decode(&user)
+		if err != nil {
+			return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+				"error": err.Error(),
+			})
+		}
+		users = append(users, user)
+	}
+
+	return c.Status(200).JSON(fiber.Map{"data": users})
 }
 
 func AuthRequestWithId(c *fiber.Ctx) (*jwt.RegisteredClaims, error){

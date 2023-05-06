@@ -25,3 +25,15 @@ func EncryptPassword(password string) (string, error){
 func VerifyPassword(hashed, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashed), []byte(password))
 }
+
+type JError struct {
+	Error string `json:"error" bson:"error"`
+}
+
+func NewJError(err error) JError {
+	jerr := JError{"generic error"}
+	if err != nil {
+		jerr.Error = err.Error()
+	}
+	return jerr
+}

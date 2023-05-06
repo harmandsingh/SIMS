@@ -13,7 +13,7 @@ import (
 func GetStudents(c *fiber.Ctx) error {
 	collection := config.GetDBCollection("students")
 
-	// find all books
+	// find all students
 	students := make([]models.Student, 0)
 	cursor, err := collection.Find(c.Context(), bson.M{})
 	if err != nil{

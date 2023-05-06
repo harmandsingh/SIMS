@@ -44,11 +44,12 @@ func run() error {
 	app.Use(cors.New())
 
 	// add routes
+	routes.AddUserGroup(app)
 	routes.AddStudentGroup(app)
 
 	// start server
 	var port string
-	if port = os.Getenv("PORT"); port != "" {
+	if port = os.Getenv("PORT"); port == "" {
 		port = "8080"
 	}
 	app.Listen(":" + port)

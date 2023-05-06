@@ -7,7 +7,7 @@ import (
 )
 
 func AddStudentGroup(app *fiber.App){
-	studentGroup := app.Group("api/v1/student")
+	studentGroup := app.Group("api/v1/students")
 
 	studentGroup.Get("/", controllers.GetStudents)
 	studentGroup.Get("/:id", controllers.GetStudent)
