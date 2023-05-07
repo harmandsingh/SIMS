@@ -11,4 +11,6 @@ type Student struct {
 	City string `json:"city" bson:"city" validate:"required"`
 	State string `json:"state" bson:"state" validate:"required"`
 	Country string `json:"country" bson:"country" validate:"required"`
+	EnrolledClass Class `json:"enrolledClass" bson:"enrolledClass"`
+	EnrolledCourses []Course `json:"enrolledCourses" bson:"enrolledCourses"`
 }
