@@ -1,6 +1,4 @@
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import {
   Box,
   Button,
@@ -9,7 +7,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import FlexBetween from "@/components/FlexBetween";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 interface LoginFormInputs {
   email: string;
@@ -24,7 +24,6 @@ const loginSchema = yup.object().shape({
 const Login = () => {
   const { palette } = useTheme();
   const {
-    register,
     control,
     handleSubmit,
     watch,
@@ -49,16 +48,22 @@ const Login = () => {
   return (
     <Container component="data" maxWidth="xs">
       <Box
+        color={palette.grey[300]}
         sx={{
-          marginTop: 10,
+          marginTop: 12,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          p: 10,
-          bgcolor: palette.grey[800],
+          bgcolor: "#2d2d34",
+          borderRadius: "12px",
         }}
       >
-        <Typography component="h1" variant="h1" color={palette.grey[100]}>
+        <LockOutlinedIcon sx={{ fontSize: "40px", mt: 4 }} />
+        <Typography
+          component="h1"
+          variant="h1"
+          sx={{ color: palette.grey[200], mt: 1 }}
+        >
           Sign In
         </Typography>
         <Box
@@ -66,49 +71,55 @@ const Login = () => {
           onSubmit={handleSubmit(formSubmitHandler)}
           alignItems="center"
           width="100%"
-          sx={{ m: 2, p: 4 }}
+          sx={{ p: 4 }}
         >
-          <FlexBetween>
-            <Controller
-              name="email"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  type="email"
-                  label="Email"
-                  variant="outlined"
-                  required={true}
-                  error={!!errors.email}
-                  helperText={errors.email ? errors.email?.message : ""}
-                />
-              )}
-            />
-          </FlexBetween>
-          <Box>
-            <Controller
-              name="password"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  type="password"
-                  label="Password"
-                  variant="outlined"
-                  required={true}
-                  error={!!errors.email}
-                  helperText={errors.email ? errors.email?.message : ""}
-                />
-              )}
-            />
-          </Box>
+          <Controller
+            name="email"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="email"
+                label="Email"
+                variant="outlined"
+                error={!!errors.email}
+                helperText={errors.email ? errors.email?.message : ""}
+                margin="normal"
+                fullWidth
+                required
+                autoFocus
+                color="secondary"
+                sx={{ color: palette.grey[100] }}
+              />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="password"
+                label="Password"
+                variant="outlined"
+                error={!!errors.email}
+                helperText={errors.email ? errors.email?.message : ""}
+                margin="normal"
+                fullWidth
+                required
+                color="secondary"
+                sx={{ color: palette.grey[100] }}
+              />
+            )}
+          />
           <Button
             type="submit"
             fullWidth
+            size="large"
             variant="contained"
-            sx={{ mt: 3, mb: 2, backgroundColor: palette.primary[400] }}
+            sx={{ mt: 3, mb: 2, backgroundColor: palette.secondary[500] }}
           >
             Sign In
           </Button>

@@ -1,8 +1,5 @@
-import { useGetStudentsQuery } from "@/state/api";
 import { GetStudentsResponse } from "@/types/Students";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
-import process from "process";
-import { useEffect } from "react";
+import { Box, useTheme } from "@mui/material";
 import useSWR from "swr";
 
 // type Props = {};
@@ -13,10 +10,10 @@ const fetcher = (url: string) =>
   fetch(`${ENDPOINT}/${url}`).then((res) => res.json());
 
 const Dashboard = () => {
-  const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
+  // const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
   const { palette } = useTheme();
 
-  const { data, mutate } = useSWR<GetStudentsResponse>("students", fetcher);
+  const { data } = useSWR<GetStudentsResponse>("students", fetcher);
 
   return (
     <Box
