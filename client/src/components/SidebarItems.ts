@@ -1,6 +1,6 @@
 import { HomeOutlined, SvgIconComponent } from "@mui/icons-material";
 
-interface NavItem {
+export interface NavItem {
   text: string;
   icon?: SvgIconComponent;
 }

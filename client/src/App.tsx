@@ -1,12 +1,11 @@
+import Login from "@/scenes/auth/login";
+import Dashboard from "@/scenes/dashboard";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { useMemo } from "react";
-import { themeSettings } from "./theme";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "@/scenes/navbar";
-import Dashboard from "@/scenes/dashboard";
-import Login from "@/scenes/auth/login";
 import Layout from "./scenes/layout";
+import { themeSettings } from "./theme";
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), []);
@@ -19,6 +18,7 @@ function App() {
             <Routes>
               <Route element={<Layout />}>
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<div>Profile Page</div>} />
               </Route>

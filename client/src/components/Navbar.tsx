@@ -1,22 +1,23 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import FlexBetween from "@/components/FlexBetween";
+import { Menu as MenuIcon, Search } from "@mui/icons-material";
 import {
   AppBar,
   Box,
   IconButton,
   InputBase,
   Toolbar,
-  Typography,
   useTheme,
 } from "@mui/material";
-import FlexBetween from "@/components/FlexBetween";
-import SchoolIcon from "@mui/icons-material/School";
-import { Menu as MenuIcon, Search } from "@mui/icons-material";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-// type Props = {};
+type NavbarProps = {
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: (value: boolean) => void;
+};
 
-const Navbar = () => {
-  const { palette } = useTheme();
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
+  const theme = useTheme();
   const [selected, setSelected] = useState("dashboard");
   return (
     <AppBar
@@ -29,45 +30,49 @@ const Navbar = () => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* Left Side */}
         <FlexBetween>
-          <IconButton onClick={() => console.log("open/close sidebar")}>
-            <MenuIcon sx={{ color: palette.grey[300] }} />
+          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+            <MenuIcon sx={{ color: theme.palette.grey[300] }} />
           </IconButton>
           <FlexBetween
-            bgcolor="#2d2d34"
+            bgcolor={theme.palette.primary[500]}
             borderRadius="9px"
             gap="3rem"
             p="0.1rem 1.5rem"
           >
             <InputBase
               placeholder="Search..."
-              sx={{ color: palette.grey[300] }}
+              sx={{ color: theme.palette.grey[100] }}
             />
             <IconButton>
-              <Search sx={{ color: palette.grey[300] }} />
+              <Search sx={{ color: theme.palette.grey[300] }} />
             </IconButton>
           </FlexBetween>
         </FlexBetween>
 
         {/* Right Side */}
-        <FlexBetween gap="2rem" sx={{ color: palette.grey[300] }}>
-          <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
+        <FlexBetween gap="2rem" sx={{ color: theme.palette.grey[300] }}>
+          <Box sx={{ "&:hover": { color: theme.palette.primary[100] } }}>
             <Link
               to="/"
               onClick={() => setSelected("dashboard")}
               style={{
-                color: selected === "dashboard" ? "inherit" : palette.grey[700],
+                color:
+                  selected === "dashboard"
+                    ? "inherit"
+                    : theme.palette.grey[700],
                 textDecoration: "inherit",
               }}
             >
               Dashboard
             </Link>
           </Box>
-          <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
+          <Box sx={{ "&:hover": { color: theme.palette.primary[100] } }}>
             <Link
               to="/profile"
               onClick={() => setSelected("profile")}
               style={{
-                color: selected === "profile" ? "inherit" : palette.grey[700],
+                color:
+                  selected === "profile" ? "inherit" : theme.palette.grey[700],
                 textDecoration: "inherit",
               }}
             >
