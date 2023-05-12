@@ -2,7 +2,7 @@ import App from "@/App.tsx";
 import "@/index.css";
 import { api } from "@/state/api";
 import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 

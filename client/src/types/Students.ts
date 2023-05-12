@@ -13,6 +13,8 @@ export interface Student {
   enrolledCourses?: EnrolledCourses[];
 }
 
+
+
 export interface EnrolledClass {
   id: string;
   name: string;
@@ -24,5 +26,5 @@ export interface EnrolledCourses {
 }
 
 export interface GetStudentsResponse {
-  data: Student[];
+  type: Student[];
 }

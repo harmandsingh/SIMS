@@ -7,6 +7,7 @@ import Navbar from "@/scenes/navbar";
 import Dashboard from "@/scenes/dashboard";
 import Login from "@/scenes/auth/login";
 import Layout from "./scenes/layout";
+import Homepage from "@/scenes/pages/homepage";
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), []);
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<div>Profile Page</div>} />
+                <Route path="/homepage" element={<Homepage/>} />
               </Route>
             </Routes>
           </Box>

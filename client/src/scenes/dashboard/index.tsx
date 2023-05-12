@@ -2,14 +2,14 @@ import { GetStudentsResponse } from "@/types/Students";
 import { Box, useTheme } from "@mui/material";
 import useSWR from "swr";
 
-// type Props = {};
+type Props = {};
 
-export const ENDPOINT = "http://localhost:4000/api/v1";
+export const ENDPOINT = "BASE_URL";
 
 const fetcher = (url: string) =>
   fetch(`${ENDPOINT}/${url}`).then((res) => res.json());
 
-const Dashboard = () => {
+const Dashboard = (props: Props) => {
   // const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
   const { palette } = useTheme();
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
       width="100%"
       display="grid"
       gap="1.5rem"
-      sx={{ color: palette.grey[100] }}
+      sx={{ color: palette.primary.main[500] }}
     >
       {data?.data && JSON.stringify(data.data)}
     </Box>
