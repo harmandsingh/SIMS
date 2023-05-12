@@ -37,7 +37,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
             bgcolor={theme.palette.primary[500]}
             borderRadius="9px"
             gap="3rem"
-            p="0.1rem 1.5rem"
+            p="0.3rem 1.5rem"
+            ml="1rem"
           >
             <InputBase
               placeholder="Search..."
