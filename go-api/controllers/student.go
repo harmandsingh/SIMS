@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"go-mongo-api/config"
-	"go-mongo-api/models"
+	"go-api/config"
+	"go-api/models"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -13,7 +13,7 @@ import (
 func GetStudents(c *fiber.Ctx) error {
 	collection := config.GetDBCollection("students")
 
-	// find all books
+	// find all students
 	students := make([]models.Student, 0)
 	cursor, err := collection.Find(c.Context(), bson.M{})
 	if err != nil{

@@ -22,7 +22,7 @@ const loginSchema = yup.object().shape({
 });
 
 const Login = () => {
-  const { palette } = useTheme();
+  const theme = useTheme();
   const {
     control,
     handleSubmit,
@@ -48,13 +48,13 @@ const Login = () => {
   return (
     <Container component="data" maxWidth="xs">
       <Box
-        color={palette.grey[300]}
+        color={theme.palette.secondary[500]}
         sx={{
           marginTop: 12,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          bgcolor: "#2d2d34",
+          bgcolor: theme.palette.primary[500],
           borderRadius: "12px",
         }}
       >
@@ -62,7 +62,7 @@ const Login = () => {
         <Typography
           component="h1"
           variant="h1"
-          sx={{ color: palette.grey[200], mt: 1 }}
+          sx={{ color: theme.palette.secondary[500], mt: 1 }}
         >
           Sign In
         </Typography>
@@ -90,7 +90,7 @@ const Login = () => {
                 required
                 autoFocus
                 color="secondary"
-                sx={{ color: palette.grey[100] }}
+                sx={{ color: theme.palette.grey[100] }}
               />
             )}
           />
@@ -110,7 +110,7 @@ const Login = () => {
                 fullWidth
                 required
                 color="secondary"
-                sx={{ color: palette.grey[100] }}
+                sx={{ color: theme.palette.grey[100] }}
               />
             )}
           />
@@ -119,7 +119,7 @@ const Login = () => {
             fullWidth
             size="large"
             variant="contained"
-            sx={{ mt: 3, mb: 2, backgroundColor: palette.secondary[500] }}
+            sx={{ mt: 3, mb: 2, backgroundColor: theme.palette.secondary[700] }}
           >
             Sign In
           </Button>

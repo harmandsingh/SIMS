@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go-mongo-api/config"
-	"go-mongo-api/routes"
+	"go-api/config"
+	"go-api/routes"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -44,12 +44,13 @@ func run() error {
 	app.Use(cors.New())
 
 	// add routes
+	routes.AddUserGroup(app)
 	routes.AddStudentGroup(app)
 	routes.AddAuthGroup(app)
 
 	// start server
 	var port string
-	if port = os.Getenv("PORT"); port != "" {
+	if port = os.Getenv("PORT"); port == "" {
 		port = "8080"
 	}
 	app.Listen(":" + port)
