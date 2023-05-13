@@ -8,5 +8,10 @@ type Class struct {
 	ID primitive.ObjectID `json:"id" bson:"_id"`
 	Name string `json:"name" bson:"name" validate:"required"`
 	Courses []Course `json:"courses" bson:"courses"`
-	Students []Student `json:"students" bson:"students"`
+	Students []ClassStudent `json:"students" bson:"students"`
+}
+
+type ClassStudent struct {
+	ID primitive.ObjectID `json:"id" bson:"_id" validate:"required"`
+	Name string `json:"name" bson:"name" validate:"required"`	
 }
