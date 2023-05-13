@@ -121,7 +121,7 @@ func Login(c *fiber.Ctx) error{
 	err = collection.FindOne(c.Context(), bson.M{"email": input.Email}).Decode(&user)
 	if err != nil {
 		log.Printf("%s signin failed: %v\n", input.Email, err.Error())
-		c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
 			"error": err.Error(),
 		})
 	}
@@ -129,7 +129,7 @@ func Login(c *fiber.Ctx) error{
 	err = utils.VerifyPassword(user.Password, input.Password)
 	if err != nil {
 		log.Printf("%s signin failed: %v\n", input.Email, err.Error())
-		c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+		return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
 			"error": "invalid signin credentials",
 		})
 	}
@@ -174,6 +174,25 @@ func GetUsers(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(fiber.Map{"data": users})
 }
+
+// func PutUser(c *fiber.Ctx) error {
+// 	collection := config.GetDBCollection("users")
+
+// 	payload, err := AuthRequestWithId(c)
+// 	if err != nil {
+// 		return c.Status(http.StatusUnauthorized).JSON(utils.NewJError(err))
+// 	}
+// 	var update models.User
+// 	err = c.BodyParser(&update)
+// 	if err != nil {
+// 		return c.Status(http.StatusUnprocessableEntity).JSON(utils.NewJError(err))
+// 	}
+// 	update.Email = utils.NormalizeEmail(update.Email)
+// 	if !govalidator.IsEmail(update.Email){
+// 		return c.Status(http.StatusBadRequest).JSON(utils.NewJError(utils.ErrInvalidEmail))
+// 	}
+// 	exists, err := collection.Find(c.Context(), bson.M{"email": update.Email})
+// }
 
 func AuthRequestWithId(c *fiber.Ctx) (*jwt.RegisteredClaims, error){
 	id := c.Params("id")

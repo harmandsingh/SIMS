@@ -1,7 +1,9 @@
 package models
 
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
 type Student struct {
-	ID string `json:"id" bson:"_id"`
+	ID primitive.ObjectID `json:"id" bson:"_id"`
 	Name string `json:"name" bson:"name" validate:"required"`
 	FatherName string `json:"fatherName" bson:"fatherName" validate:"required"`
 	MotherName string `json:"motherName" bson:"motherName" validate:"required"`
@@ -11,4 +13,6 @@ type Student struct {
 	City string `json:"city" bson:"city" validate:"required"`
 	State string `json:"state" bson:"state" validate:"required"`
 	Country string `json:"country" bson:"country" validate:"required"`
+	EnrolledClass Class `json:"enrolledClass" bson:"enrolledClass"`
+	EnrolledCourses []Course `json:"enrolledCourses" bson:"enrolledCourses"`
 }
