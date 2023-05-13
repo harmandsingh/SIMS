@@ -7,6 +7,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./scenes/layout";
 import { themeSettings } from "./theme";
 import Students from "./scenes/students";
+import Homepage from "./scenes/pages/homepage";
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), []);
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/students" element={<Students />} />
+                <Route path="/homepage" element={<Homepage />} />
               </Route>
             </Routes>
           </Box>
