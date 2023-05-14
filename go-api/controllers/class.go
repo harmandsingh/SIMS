@@ -71,15 +71,17 @@ func GetClass(c *fiber.Ctx) error {
 type createClassDTO struct {
 	Name string `json:"name" bson:"name" validate:"required"`
 	Courses []models.Course `json:"courses" bson:"courses"`
-	Students []models.ClassStudent `json:"students" bson:"students"`
+	Students []models.EnrolledStudent `json:"students" bson:"students"`
 }
 
 func CreateClass(c *fiber.Ctx) error {
 	// Validate the class body
 	class := new(createClassDTO)
 	if err := c.BodyParser(class); err != nil {
-		return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "Invalid body",})
-	}
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"error": "Invalid body",
+			"message": err.Error()})
+		}
 
 	// Create class
 	collection := config.GetDBCollection("classes")
@@ -97,7 +99,7 @@ func CreateClass(c *fiber.Ctx) error {
 type updateClassDTO struct {
 	Name string `json:"name,omitempty" bson:"name,omitempty"`
 	Courses []models.Course `json:"courses,omitempty" bson:"courses,omitempty"`
-	Students []models.ClassStudent `json:"students,omitempty" bson:"students,omitempty"`
+	Students []models.EnrolledStudent `json:"students,omitempty" bson:"students,omitempty"`
 }
 
 func UpdateClass(c *fiber.Ctx) error {
