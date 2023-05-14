@@ -31,21 +31,21 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
         {/* Left Side */}
         <FlexBetween>
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-            <MenuIcon sx={{ color: theme.palette.grey[300] }} />
+            <MenuIcon sx={{ color: theme.palette.grey[200] }} />
           </IconButton>
           <FlexBetween
-            bgcolor={theme.palette.primary[500]}
+            bgcolor={theme.palette.primary.main}
             borderRadius="9px"
             gap="3rem"
-            p="0.3rem 1.5rem"
+            p="0.1rem 1.5rem"
             ml="1rem"
           >
             <InputBase
               placeholder="Search..."
-              sx={{ color: theme.palette.grey[100] }}
+              sx={{ color: theme.palette.grey[900] }}
             />
             <IconButton>
-              <Search sx={{ color: theme.palette.grey[300] }} />
+              <Search sx={{ color: theme.palette.grey[800] }} />
             </IconButton>
           </FlexBetween>
         </FlexBetween>

@@ -10,16 +10,14 @@ const Header = ({ title, subtitle }: HeaderProps) => {
   return (
     <Box>
       <Typography
-        variant="h2"
-        color={theme.palette.secondary[100]}
+        variant="h4"
+        color={theme.palette.secondary.main}
         fontWeight="bold"
         sx={{ mb: "5px" }}
       >
         {title}
       </Typography>
-      <Typography variant="h5" color={theme.palette.secondary[300]}>
-        {subtitle}
-      </Typography>
+      <Typography color={theme.palette.primary.light}>{subtitle}</Typography>
     </Box>
   );
 };
