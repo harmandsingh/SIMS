@@ -1,6 +1,6 @@
 import DashboardBox from "@/components/DashboardBox";
 import { useGetStudentsQuery } from "@/state/api";
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 type Props = {};
@@ -8,21 +8,23 @@ type Props = {};
 // const Row1 = (props: Props) =>  {
 // const { data } =  useGetStudentsQuery();
 // console.log("🚀 ~ file: row1.tsx:10 ~ Row1 ~ data:", data)
-const data = [
+
+
+const attendance = [
     {
-        name: 'January',
+        name: 'Jan',
         uv: 4000,
         pv: 2400,
         amt: 2400,
     },
     {
-        name: 'Febrauary',
+        name: 'Feb',
         uv: 3000,
         pv: 1398,
         amt: 2210,
     },
     {
-        name: 'March',
+        name: 'Mar',
         uv: 2000,
         pv: 9800,
         amt: 2290,
@@ -46,42 +48,45 @@ const data = [
         amt: 2500,
     },
     {
-        name: 'August',
+        name: 'Aug',
         uv: 3490,
         pv: 4300,
         amt: 2100,
     },
     {
-        name: 'September',
+        name: 'Sept',
         uv: 3490,
         pv: 4300,
         amt: 2100,
     },{
-        name: 'October',
+        name: 'Oct',
         uv: 3490,
         pv: 4300,
         amt: 2100,
     },{
-        name: 'November',
+        name: 'Nov',
         uv: 3490,
         pv: 4300,
         amt: 2100,
     },{
-        name: 'December',
+        name: 'Dec',
         uv: 3490,
         pv: 4300,
         amt: 2100,
     },
 ];
 
+
 const Row1 = (props: Props) => {
+    
+
     return (
         <>
             <DashboardBox gridArea="a"><ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                     width={500}
                     height={400}
-                    data={data}
+                    data={attendance}
                     margin={{
                         top: 10,
                         right: 30,
