@@ -83,6 +83,8 @@ const Sidebar = ({
                 if (!item.icon) {
                   return (
                     <Typography
+                      fontSize="20px"
+                      fontWeight="bold"
                       key={item.text}
                       sx={{ m: "2.25rem 0 1rem 3rem" }}
                     >

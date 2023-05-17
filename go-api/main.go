@@ -41,7 +41,9 @@ func run() error {
 	// add middleware
 	app.Use(logger.New())
 	app.Use(recover.New())
-	app.Use(cors.New())
+	app.Use(cors.New(cors.Config{
+		AllowCredentials: true,
+	}))
 
 	// add routes
 	routes.AddUserGroup(app)

@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"errors"
-	"fmt"
 	"go-api/auth"
 	"go-api/config"
 	"go-api/models"
@@ -10,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/asaskevich/govalidator"
 	"github.com/gofiber/fiber/v2"
@@ -142,9 +142,17 @@ func Login(c *fiber.Ctx) error{
 		})
 	}
 
+	cookie := fiber.Cookie{
+		Name: "jwt",
+		Value: token,
+		Expires: time.Now().Add(time.Hour * 24),
+		HTTPOnly: true,
+	}
+
+	c.Cookie(&cookie)
+
 	return c.Status(http.StatusOK).JSON(fiber.Map{
-		"user": user,
-		"token": fmt.Sprintf("Bearer %s", token),
+		"message": "success",
 	})
 }
 
@@ -193,6 +201,21 @@ func GetUsers(c *fiber.Ctx) error {
 // 	}
 // 	exists, err := collection.Find(c.Context(), bson.M{"email": update.Email})
 // }
+
+func Logout(c *fiber.Ctx) error {
+	cookie := fiber.Cookie{
+		Name: "jwt",
+		Value: "",
+		Expires: time.Now().Add(-time.Hour),
+		HTTPOnly: true,
+	}
+	
+	c.Cookie(&cookie)
+
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"message": "success",
+	})
+}
 
 func AuthRequestWithId(c *fiber.Ctx) (*jwt.RegisteredClaims, error){
 	id := c.Params("id")

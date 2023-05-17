@@ -14,7 +14,7 @@ func AuthRequired(c *fiber.Ctx) error {
 	return jwtware.New(jwtware.Config{
 		SigningKey: auth.JwtSecretKey,
 		SigningMethod: auth.JwtSigningMethod,
-		TokenLookup: "header:Authorization",
+		TokenLookup: "cookie:jwt",
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			return c.Status(http.StatusUnauthorized).JSON(utils.NewJError(err))
 		},
@@ -24,8 +24,8 @@ func AuthRequired(c *fiber.Ctx) error {
 func AddUserGroup(app *fiber.App){
 	auth := app.Group("api/v1/users")
 
-	auth.Post("/login", controllers.Login)
 	auth.Post("/register", controllers.Register)
+	auth.Post("/login", controllers.Login)
 	auth.Get("/", AuthRequired, controllers.GetUsers)
 	auth.Get("/:id", AuthRequired, controllers.GetUsers)
 }
