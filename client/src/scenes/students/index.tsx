@@ -1,9 +1,9 @@
-import { fetcher } from "@/api/students";
-import { GetStudentsResponse } from "@/types/Students";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
-import useSWR from "swr";
+import { getAllStudents } from "@/api/students.service";
 import Header from "@/components/Header";
+import { Student } from "@/types/student";
+import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useEffect, useState } from "react";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 1 },
@@ -26,11 +26,16 @@ const columns: GridColDef[] = [
 ];
 
 const Students = () => {
-  const { data, isLoading, error } = useSWR<GetStudentsResponse>(
-    "students",
-    fetcher
-  );
-  const isNonMobile = useMediaQuery("(min-width: 1000px)");
+  const [students, setStudents] = useState<Student[] | null>([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    getAllStudents()
+      .then((result) => setStudents(result))
+      .catch((error) => setError(error));
+  }, []);
+
+  // const isNonMobile = useMediaQuery("(min-width: 1000px)");
   const theme = useTheme();
 
   return (
@@ -44,47 +49,14 @@ const Students = () => {
             color: theme.palette.grey[200],
           },
         }}
-        // sx={{
-        //   "&. MuiDataGrid-virtualScroller": {
-        //     backgroundColor: theme.palette.primary[400],
-        //   },
-        // }}
       >
         {!error && (
           <DataGrid
-            loading={isLoading || !data?.data}
+            loading={!students}
             getRowId={(row) => row.id}
-            rows={data?.data || []}
+            rows={students || []}
             columns={columns}
             sx={{ color: theme.palette.grey[300] }}
-            // sx={{
-            //   color: theme.palette.grey[300],
-            //   boxShadow: 4,
-            // borderColor: theme.palette.primary[400],
-            // "&. MuiDataGrid-root": {
-            //   border: "none",
-            // },
-            // "&. MuiDataGrid-cell": {
-            //   borderBottom: "none",
-            // },
-            // "&. MuiDataGrid-columnHeaders": {
-            //   backgroundColor: theme.palette.primary[500],
-            //   color: theme.palette.secondary[100],
-            //   borderBottom: "none",
-            // },
-
-            // "&. MuiDataGrid-footerContainer": {
-            //   backgroundColor: theme.palette.primary[500],
-            //   color: theme.palette.secondary[100],
-            //   borderTop: "none",
-            // },
-            // "&. MuiDataGrid-toolbarContainer .MuiButton-text": {
-            //   color: `${theme.palette.secondary[200]} !important`,
-            // },
-            // "&. MuiTablePagination-root": {
-            //   color: theme.palette.grey[100],
-            // },
-            // }}
           />
         )}
       </Box>

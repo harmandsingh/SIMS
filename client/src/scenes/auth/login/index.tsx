@@ -1,4 +1,6 @@
+import { login } from "@/api/auth.service";
 import { yupResolver } from "@hookform/resolvers/yup";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
   Box,
   Button,
@@ -9,9 +11,8 @@ import {
 } from "@mui/material";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-interface LoginFormInputs {
+export interface LoginFormInputs {
   email: string;
   password: string;
 }
@@ -26,42 +27,36 @@ const Login = () => {
   const {
     control,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(loginSchema),
   });
 
-  console.log("errors", errors);
-  console.log("watch email", watch("email"));
+  // console.log("errors", errors);
+  // console.log("watch email", watch("email"));
 
   const formSubmitHandler: SubmitHandler<LoginFormInputs> = async (
     data: LoginFormInputs
   ) => {
-    await fetch("http://localhost:4000/api/v1/users/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    login(data);
   };
 
   return (
     <Container component="data" maxWidth="xs">
       <Box
-        color={theme.palette.secondary[500]}
+        color={theme.palette.primary.main}
         sx={{
           marginTop: 12,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          bgcolor: theme.palette.primary[500],
+          bgcolor: theme.palette.background.paper,
           borderRadius: "12px",
         }}
       >
-        <LockOutlinedIcon sx={{ fontSize: "40px", mt: 4 }} />
+        <LockOutlinedIcon sx={{ fontSize: "60px", mt: 4 }} />
         <Typography
-          component="h1"
-          variant="h1"
+          variant="h2"
           sx={{ color: theme.palette.secondary[500], mt: 1 }}
         >
           Sign In
@@ -119,7 +114,7 @@ const Login = () => {
             fullWidth
             size="large"
             variant="contained"
-            sx={{ mt: 3, mb: 2, backgroundColor: theme.palette.secondary[700] }}
+            sx={{ mt: 3, mb: 2, backgroundColor: theme.palette.secondary.main }}
           >
             Sign In
           </Button>

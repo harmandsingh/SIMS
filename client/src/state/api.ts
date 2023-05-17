@@ -1,4 +1,4 @@
-import { GetStudentsResponse } from "@/types/Students";
+import { GetStudentsResponse } from "@/types/student";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
