@@ -26,7 +26,7 @@ func AddUserGroup(app *fiber.App){
 
 	auth.Post("/register", controllers.Register)
 	auth.Post("/login", controllers.Login)
-	auth.Post("/logout", controllers.Logout)
+	auth.Post("/logout", AuthRequired, controllers.Logout)
 	auth.Get("/", AuthRequired, controllers.GetUsers)
 	auth.Get("/:id", AuthRequired, controllers.GetUsers)
 }

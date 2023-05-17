@@ -9,9 +9,9 @@ import (
 func AddClassGroup(app *fiber.App){
 	classGroup := app.Group("api/v1/classes")
 
-	classGroup.Get("/", controllers.GetClasses)
-	classGroup.Get("/:id", controllers.GetClass)
-	classGroup.Post("/", controllers.CreateClass)
-	classGroup.Put("/:id", controllers.UpdateClass)
-	classGroup.Delete("/:id", controllers.DeleteClass)
+	classGroup.Get("/", AuthRequired, controllers.GetClasses)
+	classGroup.Get("/:id", AuthRequired, controllers.GetClass)
+	classGroup.Post("/", AuthRequired, controllers.CreateClass)
+	classGroup.Put("/:id", AuthRequired, controllers.UpdateClass)
+	classGroup.Delete("/:id", AuthRequired, controllers.DeleteClass)
 }
