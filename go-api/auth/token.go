@@ -19,7 +19,7 @@ func NewToken(userId string) (string, error) {
 		ID: userId,
 		Issuer: userId,
 		IssuedAt: jwt.NewNumericDate(time.Now()),
-		ExpiresAt: jwt.NewNumericDate(time.Now().Add(30 * time.Minute)),
+		ExpiresAt: jwt.NewNumericDate(time.Now().Add(2 * time.Hour)), // 2 Hours
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(JwtSecretKey)

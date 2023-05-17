@@ -142,17 +142,22 @@ func Login(c *fiber.Ctx) error{
 		})
 	}
 
-	cookie := fiber.Cookie{
-		Name: "jwt",
-		Value: token,
-		Expires: time.Now().Add(time.Hour * 24),
-		HTTPOnly: true,
-	}
+	// cookie := fiber.Cookie{
+	// 	Name: "jwt",
+	// 	Value: token,
+	// 	Expires: time.Now().Add(time.Hour * 24),
+	// 	HTTPOnly: true,
+	// }
 
-	c.Cookie(&cookie)
+	// c.Cookie(&cookie)
+
+	// return c.Status(http.StatusOK).JSON(fiber.Map{
+	// 	"message": "success",
+	// })
 
 	return c.Status(http.StatusOK).JSON(fiber.Map{
-		"message": "success",
+		"user": user,
+		"token": token,
 	})
 }
 
