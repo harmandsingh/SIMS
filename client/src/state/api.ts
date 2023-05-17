@@ -18,15 +18,16 @@ import { useId } from "react";
 
 //TagType: Student
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:4000/' }),
   reducerPath: "api",
   tagTypes: ["Student"],
   endpoints: (build) => ({
     //GET students
-    getStudents: build.query<void, void>({
-      query: () => "api/v1/student",
+    getStudents: build.query<Array<GetStudentsResponse>, void>({          //<response, payload>
+      query: () => "api/v1/students",
       providesTags: ["Student"],    
     }),
+    
     //GET A student
     // getStudent: build.query<Student, String>({
     //   query: useId() => "api/v1/student/id", 
