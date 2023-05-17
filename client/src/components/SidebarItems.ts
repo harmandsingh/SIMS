@@ -1,4 +1,6 @@
-import { HomeOutlined, SvgIconComponent } from "@mui/icons-material";
+import { HomeOutlined, SvgIconComponent, Home } from "@mui/icons-material";
+import ClassIcon from "@mui/icons-material/Class";
+import SchoolIcon from "@mui/icons-material/School";
 
 export interface NavItem {
   text: string;
@@ -8,18 +10,18 @@ export interface NavItem {
 export const NavItems = [
   {
     text: "Dashboard",
-    icon: HomeOutlined,
+    icon: Home,
   } as NavItem,
   {
     text: "Academic",
   } as NavItem,
   {
     text: "Students",
-    icon: HomeOutlined,
+    icon: SchoolIcon,
   } as NavItem,
   {
     text: "Classes",
-    icon: HomeOutlined,
+    icon: ClassIcon,
   } as NavItem,
   {
     text: "Courses",

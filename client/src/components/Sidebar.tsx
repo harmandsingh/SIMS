@@ -1,5 +1,6 @@
 import FlexBetween from "@/components/FlexBetween";
 import { ChevronLeft, ChevronRightOutlined } from "@mui/icons-material";
+import SchoolIcon from "@mui/icons-material/School";
 import {
   Box,
   Drawer,
@@ -47,8 +48,8 @@ const Sidebar = ({
           sx={{
             width: drawerWidth,
             "& .MuiDrawer-paper": {
-              color: theme.palette.secondary[200],
-              backgroundColor: theme.palette.primary[500],
+              color: theme.palette.grey[900],
+              backgroundColor: theme.palette.primary.main,
               boxSizing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
               width: drawerWidth,
@@ -56,14 +57,16 @@ const Sidebar = ({
           }}
         >
           <Box width="100%">
-            <Box m="1.5rem 2rem 2rem 3rem">
-              <FlexBetween color={theme.palette.secondary.main}>
+            <Box m="2rem 2rem 2rem 1.5rem">
+              <FlexBetween>
                 <Box display="flex" alignItems="center" gap="0.5rem">
+                  <SchoolIcon sx={{ fontSize: 70 }} />
                   <Typography
-                    variant="h2"
+                    variant="h3"
                     fontWeight="bold"
-                    ml="1rem"
-                    color={theme.palette.grey[300]}
+                    ml="0.2rem"
+                    mt="0.25rem"
+                    color={theme.palette.grey[900]}
                   >
                     SIMS
                   </Typography>
@@ -80,6 +83,8 @@ const Sidebar = ({
                 if (!item.icon) {
                   return (
                     <Typography
+                      fontSize="20px"
+                      fontWeight="bold"
                       key={item.text}
                       sx={{ m: "2.25rem 0 1rem 3rem" }}
                     >
@@ -99,24 +104,24 @@ const Sidebar = ({
                       sx={{
                         backgroundColor:
                           active === lcText
-                            ? theme.palette.secondary[300]
+                            ? theme.palette.secondary.main
                             : "transparent",
                         color:
                           active === lcText
-                            ? theme.palette.primary[600]
-                            : theme.palette.secondary[100],
+                            ? theme.palette.common.black
+                            : theme.palette.common.black,
                       }}
                     >
                       <ListItemIcon
                         sx={{
-                          ml: "2rem",
+                          ml: "1.25rem",
                           color:
                             active === lcText
-                              ? theme.palette.primary[600]
-                              : theme.palette.secondary[200],
+                              ? theme.palette.common.black
+                              : theme.palette.common.black,
                         }}
                       >
-                        <item.icon />
+                        <item.icon sx={{ fontSize: 30 }} />
                       </ListItemIcon>
                       <ListItemText primary={item.text} />
                       {active === lcText && (

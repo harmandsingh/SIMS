@@ -7,22 +7,22 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Name", flex: 1 },
-  { field: "fatherName", headerName: "Father Name", flex: 1 },
-  { field: "motherName", headerName: "Mother Name", flex: 1 },
-  { field: "dob", headerName: "Date of Birth", flex: 1 },
+  { field: "name", headerName: "Name", flex: 0.75 },
+  { field: "fatherName", headerName: "Father Name", flex: 0.75 },
+  { field: "motherName", headerName: "Mother Name", flex: 0.75 },
+  { field: "dob", headerName: "Date of Birth", flex: 0.5 },
   {
     field: "phoneNumber",
     headerName: "Phone Number",
-    flex: 1,
+    flex: 0.75,
     renderCell: (params) => {
       return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
     },
   },
-  { field: "streetAddress", headerName: "Street Address", flex: 1 },
-  { field: "city", headerName: "City", flex: 0.7 },
-  { field: "state", headerName: "State", flex: 0.7 },
-  { field: "country", headerName: "Country", flex: 0.7 },
+  { field: "streetAddress", headerName: "Street Address", flex: 0.75 },
+  { field: "city", headerName: "City", flex: 0.5 },
+  { field: "state", headerName: "State", flex: 0.5 },
+  { field: "country", headerName: "Country", flex: 0.5 },
 ];
 
 const Students = () => {
@@ -34,10 +34,10 @@ const Students = () => {
   const theme = useTheme();
 
   return (
-    <Box m="2rem 2rem">
+    <Box m="2rem 1.25rem">
       <Header title="STUDENTS" subtitle="List of currently enrolled students" />
       <Box
-        mt="30px"
+        mt="25px"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {

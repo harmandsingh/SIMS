@@ -2,15 +2,17 @@ import Login from "@/scenes/auth/login";
 import Dashboard from "@/scenes/dashboard";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import { useMemo } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./scenes/layout";
-import { themeSettings } from "./theme";
 import Students from "./scenes/students";
 import Homepage from "./scenes/pages/homepage";
 
 function App() {
-  const theme = useMemo(() => createTheme(themeSettings), []);
+  const theme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
   return (
     <div className="app">
       <BrowserRouter>

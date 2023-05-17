@@ -41,10 +41,18 @@ func run() error {
 	// add middleware
 	app.Use(logger.New())
 	app.Use(recover.New())
-	app.Use(cors.New())
+	app.Use(cors.New(cors.Config{
+		AllowCredentials: true,
+	}))
 
 	// add routes
 	routes.AddUserGroup(app)
+<<<<<<< HEAD
+=======
+	routes.AddStudentGroup(app)
+	routes.AddClassGroup(app)
+	routes.AddTeacherGroup(app)
+>>>>>>> be60425adde3bc2af7fe0cd5ed55cb984404af7a
 
 	// start server
 	var port string
