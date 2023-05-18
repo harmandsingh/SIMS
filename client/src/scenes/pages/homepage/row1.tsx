@@ -1,7 +1,7 @@
 import DashboardBox from "@/components/DashboardBox";
 import { useGetStudentsQuery } from "@/state/api";
 import React, { PureComponent, useMemo } from 'react';
-import { LineChart, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, Legend } from 'recharts';
+import { Bar, BarChart, LineChart, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, Legend } from 'recharts';
 import BoxHeader from '@/components/BoxHeader';
 import { useTheme } from "@mui/material";
 
@@ -79,18 +79,60 @@ const attendance = [
     },
 ];
 
-
+const ratio = [
+    {
+        classname: 'class IV',
+        students: 4000,
+        teachers: 2400,
+        amt: 2400,
+    },
+    {
+        class: 'class V',
+        students: 3000,
+        teachers: 1398,
+        amt: 2210,
+    },
+    {
+        classname: 'class VI',
+        students: 2000,
+        teachers: 9800,
+        amt: 2290,
+    },
+    {
+        classname: 'class VII',
+        students: 2780,
+        teachers: 3908,
+        amt: 2000,
+    },
+    {
+        classname: 'class VIII',
+        students: 1890,
+        teachers: 4800,
+        amt: 2181,
+    },
+    {
+        classname: 'class IX',
+        students: 2390,
+        teachers: 3800,
+        amt: 2500,
+    },
+    {
+        classname: 'class X',
+        students: 3490,
+        teachers: 4300,
+        amt: 2100,
+    },
+];
 
 
 const Row1 = (props: Props) => {
     const { palette } = useTheme();
-    
-    
+
+
 
 
     return (
         <>
-        //Firt block on the dashboard
             <DashboardBox gridArea="a">
                 <BoxHeader
                     title="Student's attendance: "
@@ -128,13 +170,69 @@ const Row1 = (props: Props) => {
                     </AreaChart>
                 </ResponsiveContainer>
             </DashboardBox>
-            
-            //Second block on the dashboard
-                        
+
+
+
             <DashboardBox gridArea="b">
-                
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                        width={500}
+                        height={400}
+                        data={attendance}
+                        margin={{
+                            top: 15,
+                            right: 25,
+                            left: -10,
+                            bottom: 60,
+                        }}
+                    >
+                        <defs>
+                            <linearGradient id="colorCurrent" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor={palette.primary[300]} stopOpacity={0.5} />
+                                <stop offset="95%" stopColor={palette.primary[300]} stopOpacity={0} />
+                            </linearGradient>
+                            <linearGradient id="colorPrevious" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor={palette.primary[300]} stopOpacity={0.5} />
+                                <stop offset="95%" stopColor={palette.primary[300]} stopOpacity={0} />
+                            </linearGradient>
+                        </defs>
+                        <XAxis dataKey="month" tickLine={false} style={{ fontSize: "10px" }} />
+                        <YAxis tickLine={false} axisLine={{ strokeWidth: "0" }} style={{ fontSize: "10px" }} domain={[500, 3000]} />
+                        <Tooltip />
+                        <Line type="monotone" dataKey="presentStu" dot={true} stroke={palette.secondary.main} fill="url(#colorCurrent)" />
+                        <Line type="monotone" dataKey="previous" dot={true} stroke={palette.secondary.main} fill="url(#colorPrevious)" />
+                    </LineChart>
+                </ResponsiveContainer>
             </DashboardBox>
-            <DashboardBox gridArea="c"></DashboardBox>
+
+            <DashboardBox gridArea="c">
+                <BoxHeader
+                    title="Student to faculty ratio for each class:"
+               
+                />
+                <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                        width={500}
+                        height={400}
+                        data={ratio}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 50,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="classname" tickLine={false}/>
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="students" fill="#8884d8" />
+                        <Bar dataKey="teachers" fill="#82ca9d" />
+                    </BarChart>
+                </ResponsiveContainer>
+
+            </DashboardBox>
         </>
     );
 }
