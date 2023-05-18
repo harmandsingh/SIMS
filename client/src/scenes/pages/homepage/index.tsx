@@ -65,7 +65,6 @@ const Homepage = () => {
         gridTemplateAreas: gridTemplateSmallScreens
     }}
     >
-        //Data providers
         
         <Row1 />
         <Row2 />
