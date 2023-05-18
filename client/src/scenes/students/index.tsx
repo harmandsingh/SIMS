@@ -1,6 +1,6 @@
 import { fetcher } from "@/api/students";
 import { GetStudentsResponse } from "@/types/Students";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, useMediaQuery, useTheme } from "@mui/material";
 import useSWR from "swr";
 import Header from "@/components/Header";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -33,10 +33,12 @@ const Students = () => {
   );
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
   const theme = useTheme();
+  const print_current_page=window.print();
 
   return (
     <Box m="2rem 1.25rem">
       <Header title="STUDENTS" subtitle="List of currently enrolled students" />
+      
       <Box
         mt="25px"
         height="75vh"
@@ -86,6 +88,7 @@ const Students = () => {
             //   color: theme.palette.grey[100],
             // },
             // }}
+            
           />
         )}
         

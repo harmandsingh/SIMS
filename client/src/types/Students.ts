@@ -26,5 +26,5 @@ export interface EnrolledCourses {
 }
 
 export interface GetStudentsResponse {
-  type: Student[];
+  data: Student[];
 }
