@@ -4,6 +4,7 @@ import { Box, useMediaQuery, useTheme } from "@mui/material";
 import useSWR from "swr";
 import Header from "@/components/Header";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+//import  Button from "@material-ui/core";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 1 },
@@ -87,6 +88,7 @@ const Students = () => {
             // }}
           />
         )}
+        
       </Box>
     </Box>
   );
