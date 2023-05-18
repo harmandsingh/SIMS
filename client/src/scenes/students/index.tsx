@@ -1,29 +1,10 @@
 import { getAllStudents } from "@/api/students.service";
 import Header from "@/components/Header";
+import { StudentColumns } from "@/components/data-grid-columns/students";
 import { Student } from "@/types/student";
 import { Box, useTheme } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Name", flex: 0.75 },
-  { field: "fatherName", headerName: "Father Name", flex: 0.75 },
-  { field: "motherName", headerName: "Mother Name", flex: 0.75 },
-  { field: "dob", headerName: "Date of Birth", flex: 0.5 },
-  {
-    field: "phoneNumber",
-    headerName: "Phone Number",
-    flex: 0.75,
-    renderCell: (params) => {
-      return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
-    },
-  },
-  { field: "streetAddress", headerName: "Street Address", flex: 0.75 },
-  { field: "city", headerName: "City", flex: 0.5 },
-  { field: "state", headerName: "State", flex: 0.5 },
-  { field: "country", headerName: "Country", flex: 0.5 },
-];
 
 const Students = () => {
   const [students, setStudents] = useState<Student[] | null>([]);
@@ -40,7 +21,7 @@ const Students = () => {
 
   return (
     <Box m="2rem 1.25rem">
-      <Header title="STUDENTS" subtitle="List of currently enrolled students" />
+      <Header title="Students" subtitle="List of currently enrolled students" />
       <Box
         mt="25px"
         height="75vh"
@@ -55,7 +36,7 @@ const Students = () => {
             loading={!students}
             getRowId={(row) => row.id}
             rows={students || []}
-            columns={columns}
+            columns={StudentColumns}
             sx={{ color: theme.palette.grey[300] }}
           />
         )}
