@@ -8,61 +8,61 @@ import { useTheme } from "@mui/material";
 //type Props = {}
 const participation = [
     {
-      month: 'class 1',
+      class: 'class 1',
       a: 500,
       b: 240,
       c: 244,
     },
     {
-      month: 'class 2',
+      class: 'class 2',
       a: 400,
       b: 138,
       c: 221,
     },
     {
-      month: 'class 3',
+      class: 'class 3',
       a: 455,
       b: 980,
       c: 220,
     },
     {
-      month: 'class 4',
+        class: 'class 4',
       a: 480,
       b: 390,
       c: 200,
     },
     {
-      month: 'class 5',
+        class: 'class 5',
       a: 490,
       b: 380,
       c: 218,
     },
     {
-      month: 'class 6',
+        class: 'class 6',
       a: 600,
       b: 300,
       c: 250,
     },
     {
-      month: 'class 7',
+        class: 'class 7',
       a: 620,
       b: 400,
       c: 100,
     },
     {
-        month: 'class 8',
+        class: 'class 8',
         a: 890,
         b: 480,
         c: 300,
       },
       {
-        month: 'class 9',
+        class: 'class 9',
         a: 800,
         b: 380,
         c: 250,
       },
       {
-        month: 'class 10',
+        class: 'class 10',
         a: 803,
         b: 430,
         c: 200,
@@ -114,11 +114,11 @@ const Row3 = () => {
                         margin={{
                             top: 8,
                             right: 20,
-                            left: -10,
+                            left: 10,
                             bottom: 55,
                         }}
                         >
-                        <XAxis dataKey="month" />
+                        <XAxis dataKey="class" />
                         <YAxis tickFormatter={toPercent} tickLine={false} />
                         <Tooltip content={renderTooltipContent} />
                         <Area type="monotone" dataKey="a" stackId="1" stroke="#8884d8" fill="#8884d8" />
