@@ -11,12 +11,14 @@ export const login = async ({ email, password }: LoginFormInputs) => {
     email,
     password,
   });
-  if (response.data.token) {
+  if (response.data.token && response.data.user.username) {
     localStorage.setItem("user", response.data.token);
+    localStorage.setItem("username", response.data.user.username);
   }
   return response.data.user;
 };
 
 export const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("username");
 };

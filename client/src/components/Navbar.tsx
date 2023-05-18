@@ -1,3 +1,4 @@
+import { logout } from "@/api/auth.service";
 import FlexBetween from "@/components/FlexBetween";
 import { Menu as MenuIcon, Search } from "@mui/icons-material";
 import {
@@ -78,6 +79,19 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
               }}
             >
               Profile
+            </Link>
+          </Box>
+          <Box sx={{ "&:hover": { color: theme.palette.primary[100] } }}>
+            <Link
+              to="/login"
+              onClick={() => logout()}
+              style={{
+                color:
+                  selected === "profile" ? "inherit" : theme.palette.grey[700],
+                textDecoration: "inherit",
+              }}
+            >
+              Logout
             </Link>
           </Box>
         </FlexBetween>

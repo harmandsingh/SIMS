@@ -1,4 +1,5 @@
 import { login } from "@/api/auth.service";
+import { User } from "@/types/user";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
@@ -9,7 +10,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 export interface LoginFormInputs {
@@ -23,6 +26,9 @@ const loginSchema = yup.object().shape({
 });
 
 const Login = () => {
+  const [error, setError] = useState("");
+  const [response, setRespone] = useState<User | null>(null);
+  const navigate = useNavigate();
   const theme = useTheme();
   const {
     control,
@@ -32,14 +38,27 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  // console.log("errors", errors);
-  // console.log("watch email", watch("email"));
-
   const formSubmitHandler: SubmitHandler<LoginFormInputs> = async (
     data: LoginFormInputs
   ) => {
-    login(data);
+    try {
+      // Get response from server
+      const response = await login(data);
+
+      // Set the response
+      setRespone(response);
+    } catch (error: any) {
+      setError(error.message);
+    }
   };
+
+  console.log(response);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      navigate("/dashboard");
+    }
+  });
 
   return (
     <Container component="data" maxWidth="xs">
@@ -50,14 +69,17 @@ const Login = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          bgcolor: theme.palette.background.paper,
+          bgcolor: theme.palette.primary.main,
           borderRadius: "12px",
         }}
       >
-        <LockOutlinedIcon sx={{ fontSize: "60px", mt: 4 }} />
+        <LockOutlinedIcon
+          sx={{ fontSize: "70px", mt: 4, color: theme.palette.common.black }}
+        />
         <Typography
           variant="h2"
-          sx={{ color: theme.palette.secondary[500], mt: 1 }}
+          fontWeight="bold"
+          sx={{ color: theme.palette.common.black, mt: 1 }}
         >
           Sign In
         </Typography>
@@ -65,8 +87,9 @@ const Login = () => {
           component="form"
           onSubmit={handleSubmit(formSubmitHandler)}
           alignItems="center"
+          color={theme.palette.common.black}
           width="100%"
-          sx={{ p: 4 }}
+          sx={{ p: 4, color: theme.palette.common.black }}
         >
           <Controller
             name="email"
@@ -85,7 +108,14 @@ const Login = () => {
                 required
                 autoFocus
                 color="secondary"
-                sx={{ color: theme.palette.grey[100] }}
+                sx={{
+                  input: {
+                    color: theme.palette.common.black,
+                    "&::placeholder": {
+                      color: theme.palette.grey[300],
+                    },
+                  },
+                }}
               />
             )}
           />
@@ -105,7 +135,14 @@ const Login = () => {
                 fullWidth
                 required
                 color="secondary"
-                sx={{ color: theme.palette.grey[100] }}
+                sx={{
+                  input: {
+                    color: theme.palette.common.black,
+                    "&::placeholder": {
+                      color: theme.palette.grey[300],
+                    },
+                  },
+                }}
               />
             )}
           />
@@ -114,11 +151,16 @@ const Login = () => {
             fullWidth
             size="large"
             variant="contained"
-            sx={{ mt: 3, mb: 2, backgroundColor: theme.palette.secondary.main }}
+            sx={{
+              mt: 3,
+              mb: 2,
+              backgroundColor: theme.palette.secondary.main,
+            }}
           >
             Sign In
           </Button>
         </Box>
+        {error}
       </Box>
     </Container>
   );
