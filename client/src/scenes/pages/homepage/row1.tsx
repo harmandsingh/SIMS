@@ -1,7 +1,7 @@
 import DashboardBox from "@/components/DashboardBox";
 import { useGetStudentsQuery } from "@/state/api";
 import React, { PureComponent, useMemo } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, Legend } from 'recharts';
 import BoxHeader from '@/components/BoxHeader';
 import { useTheme } from "@mui/material";
 
@@ -24,7 +24,7 @@ const attendance = [
         month: 'June',
         presentStu: 890,
         pv: 4800,
-        previous: 790,
+        previous: 1000,
     },
     {
         month: 'July',
@@ -80,20 +80,25 @@ const attendance = [
 ];
 
 
+
+
 const Row1 = (props: Props) => {
     const { palette } = useTheme();
+    
+    
+
 
     return (
         <>
+        //Firt block on the dashboard
             <DashboardBox gridArea="a">
-                 <BoxHeader
-                    subtitle="Student's attendance"
-                  //  subtitle="The top line represents students attended the school."
-                    //sideText="+4%"
+                <BoxHeader
+                    title="Student's attendance: "
+                    // subtitle="The lines represents current and previous year attendance."
+                    sideText="Increases by  +14%"
                 />
 
                 <ResponsiveContainer width="100%" height="100%">
-                    
                     <AreaChart
                         width={500}
                         height={400}
@@ -107,25 +112,28 @@ const Row1 = (props: Props) => {
                     >
                         <defs>
                             <linearGradient id="colorCurrent" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor={palette.primary[300]} stopOpacity={0.5}/>
-                                <stop offset="95%" stopColor={palette.primary[300]} stopOpacity={0}/>
+                                <stop offset="5%" stopColor={palette.primary[300]} stopOpacity={0.5} />
+                                <stop offset="95%" stopColor={palette.primary[300]} stopOpacity={0} />
                             </linearGradient>
                             <linearGradient id="colorPrevious" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor={palette.primary[300]} stopOpacity={0.5}/>
-                                <stop offset="95%" stopColor={palette.primary[300]} stopOpacity={0}/>
+                                <stop offset="5%" stopColor={palette.primary[300]} stopOpacity={0.5} />
+                                <stop offset="95%" stopColor={palette.primary[300]} stopOpacity={0} />
                             </linearGradient>
                         </defs>
-                        <XAxis dataKey="month" tickLine ={false} style={{fontSize: "10px"}}/>
-                        <YAxis tickLine={false} axisLine={{strokeWidth:"0"}} style={{fontSize:"10px"}} domain={[500, 3000]}/>
+                        <XAxis dataKey="month" tickLine={false} style={{ fontSize: "10px" }} />
+                        <YAxis tickLine={false} axisLine={{ strokeWidth: "0" }} style={{ fontSize: "10px" }} domain={[500, 3000]} />
                         <Tooltip />
-                        <Area type="monotone" dataKey="presentStu" dot={true} stroke={palette.secondary.main}  fill="url(#colorCurrent)" />
-                        <Area type="monotone" dataKey="previous" dot={true}  stroke={palette.secondary.main}  fill="url(#colorPrevious)" />
-
+                        <Area type="monotone" dataKey="presentStu" dot={true} stroke={palette.secondary.main} fill="url(#colorCurrent)" />
+                        <Area type="monotone" dataKey="previous" dot={true} stroke={palette.secondary.main} fill="url(#colorPrevious)" />
                     </AreaChart>
-                </ResponsiveContainer> 
+                </ResponsiveContainer>
             </DashboardBox>
-
-            <DashboardBox gridArea="b"></DashboardBox>
+            
+            //Second block on the dashboard
+                        
+            <DashboardBox gridArea="b">
+                
+            </DashboardBox>
             <DashboardBox gridArea="c"></DashboardBox>
         </>
     );
