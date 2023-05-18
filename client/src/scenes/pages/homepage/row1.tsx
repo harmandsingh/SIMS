@@ -2,6 +2,8 @@ import DashboardBox from "@/components/DashboardBox";
 import { useGetStudentsQuery } from "@/state/api";
 import React, { PureComponent, useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import BoxHeader from '@/components/BoxHeader';
+import { useTheme } from "@mui/material";
 
 type Props = {};
 
@@ -11,97 +13,118 @@ type Props = {};
 
 
 const attendance = [
+
     {
-        name: 'Jan',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: 'Feb',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: 'Mar',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: 'April',
-        uv: 2780,
+        month: 'April',
+        presentStu: 1780,
         pv: 3908,
-        amt: 2000,
+        previous: 1290,
     },
     {
-        name: 'June',
-        uv: 1890,
+        month: 'June',
+        presentStu: 890,
         pv: 4800,
-        amt: 2181,
+        previous: 790,
     },
     {
-        name: 'July',
-        uv: 2390,
+        month: 'July',
+        presentStu: 1390,
         pv: 3800,
-        amt: 2500,
+        previous: 1300,
     },
     {
-        name: 'Aug',
-        uv: 3490,
+        month: 'Aug',
+        presentStu: 2490,
         pv: 4300,
-        amt: 2100,
+        previous: 1790,
     },
     {
-        name: 'Sept',
-        uv: 3490,
+        month: 'Sept',
+        presentStu: 2490,
         pv: 4300,
-        amt: 2100,
-    },{
-        name: 'Oct',
-        uv: 3490,
+        previous: 2090,
+    }, {
+        month: 'Oct',
+        presentStu: 2590,
         pv: 4300,
-        amt: 2100,
-    },{
-        name: 'Nov',
-        uv: 3490,
+        previous: 2290,
+    }, {
+        month: 'Nov',
+        presentStu: 2400,
         pv: 4300,
-        amt: 2100,
-    },{
-        name: 'Dec',
-        uv: 3490,
+        previous: 2090,
+    }, {
+        month: 'Dec',
+        presentStu: 2490,
         pv: 4300,
-        amt: 2100,
+        previous: 2000,
+    },
+    {
+        month: 'Jan',
+        presentStu: 3000,
+        pv: 2400,
+        previous: 2700,
+    },
+    {
+        month: 'Feb',
+        presentStu: 2000,
+        pv: 1398,
+        previous: 1790,
+    },
+    {
+        month: 'Mar',
+        presentStu: 1000,
+        pv: 9800,
+        previous: 790,
     },
 ];
 
 
 const Row1 = (props: Props) => {
-    
+    const { palette } = useTheme();
 
     return (
         <>
-            <DashboardBox gridArea="a"><ResponsiveContainer width="100%" height="100%">
-                <AreaChart
-                    width={500}
-                    height={400}
-                    data={attendance}
-                    margin={{
-                        top: 10,
-                        right: 30,
-                        left: 0,
-                        bottom: 0,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-                </AreaChart>
-            </ResponsiveContainer>
+            <DashboardBox gridArea="a">
+                 <BoxHeader
+                    subtitle="Student's attendance"
+                  //  subtitle="The top line represents students attended the school."
+                    //sideText="+4%"
+                />
+
+                <ResponsiveContainer width="100%" height="100%">
+                    
+                    <AreaChart
+                        width={500}
+                        height={400}
+                        data={attendance}
+                        margin={{
+                            top: 15,
+                            right: 25,
+                            left: -10,
+                            bottom: 60,
+                        }}
+                    >
+                        <defs>
+                            <linearGradient id="colorCurrent" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor={palette.primary[300]} stopOpacity={0.5}/>
+                                <stop offset="95%" stopColor={palette.primary[300]} stopOpacity={0}/>
+                            </linearGradient>
+                            <linearGradient id="colorPrevious" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor={palette.primary[300]} stopOpacity={0.5}/>
+                                <stop offset="95%" stopColor={palette.primary[300]} stopOpacity={0}/>
+                            </linearGradient>
+                        </defs>
+                        <XAxis dataKey="month" tickLine ={false} style={{fontSize: "10px"}}/>
+                        <YAxis tickLine={false} axisLine={{strokeWidth:"0"}} style={{fontSize:"10px"}} domain={[500, 3000]}/>
+                        <Tooltip />
+                        <Area type="monotone" dataKey="presentStu" dot={true} stroke={palette.secondary.main}  fill="url(#colorCurrent)" />
+                        <Area type="monotone" dataKey="previous" dot={true}  stroke={palette.secondary.main}  fill="url(#colorPrevious)" />
+
+                    </AreaChart>
+                </ResponsiveContainer> 
             </DashboardBox>
+
             <DashboardBox gridArea="b"></DashboardBox>
             <DashboardBox gridArea="c"></DashboardBox>
         </>
