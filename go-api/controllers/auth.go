@@ -19,14 +19,14 @@ import (
 )
 
 // Register input struct
-type registerDTO struct{
-		Username string `json:"username" bson:"username" validate:"required"`
-		Email string `json:"email" bson:"email" validate:"required"`
-		Password string `json:"password" bson:"password" validate:"required"`
-		ConfirmPassword string `json:"confirmPassword" bson:"confirmPassword" validate:"required"`
+type registerDTO struct {
+	Username        string `json:"username" bson:"username" validate:"required"`
+	Email           string `json:"email" bson:"email" validate:"required"`
+	Password        string `json:"password" bson:"password" validate:"required"`
+	ConfirmPassword string `json:"confirmPassword" bson:"confirmPassword" validate:"required"`
 }
 
-func Register(c *fiber.Ctx) error{
+func Register(c *fiber.Ctx) error {
 	newUser := new(registerDTO)
 
 	// Validate the request body
@@ -38,7 +38,7 @@ func Register(c *fiber.Ctx) error{
 
 	// Check for valid email
 	newUser.Email = utils.NormalizeEmail(newUser.Email)
-	if !govalidator.IsEmail(newUser.Email){
+	if !govalidator.IsEmail(newUser.Email) {
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"error": "invalid email",
 		})
@@ -63,12 +63,12 @@ func Register(c *fiber.Ctx) error{
 	}
 
 	// Check for empty password
-	if strings.TrimSpace(newUser.Password) == ""{
+	if strings.TrimSpace(newUser.Password) == "" {
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "empty password"})
 	}
 
 	// Check if password and confirm password are equal
-	if newUser.Password != newUser.ConfirmPassword{
+	if newUser.Password != newUser.ConfirmPassword {
 		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"error": "passwords do not match",
 		})
@@ -91,7 +91,7 @@ func Register(c *fiber.Ctx) error{
 	result, err := collection.InsertOne(c.Context(), userDB)
 	if err != nil {
 		c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"error": "error creating user",
+			"error":   "error creating user",
 			"message": err.Error(),
 		})
 	}
@@ -102,11 +102,11 @@ func Register(c *fiber.Ctx) error{
 }
 
 type loginDTO struct {
-	Email string `json:"email" bson:"email" validate:"required"`
+	Email    string `json:"email" bson:"email" validate:"required"`
 	Password string `json:"password" bson:"password" validate:"required"`
 }
 
-func Login(c *fiber.Ctx) error{
+func Login(c *fiber.Ctx) error {
 	input := new(loginDTO)
 	err := c.BodyParser(&input)
 	if err != nil {
@@ -114,7 +114,7 @@ func Login(c *fiber.Ctx) error{
 			"error": err.Error(),
 		})
 	}
-	
+
 	user := models.User{}
 	collection := config.GetDBCollection("users")
 	input.Email = utils.NormalizeEmail(input.Email)
@@ -142,17 +142,22 @@ func Login(c *fiber.Ctx) error{
 		})
 	}
 
-	cookie := fiber.Cookie{
-		Name: "jwt",
-		Value: token,
-		Expires: time.Now().Add(time.Hour * 24),
-		HTTPOnly: true,
-	}
+	// cookie := fiber.Cookie{
+	// 	Name: "jwt",
+	// 	Value: token,
+	// 	Expires: time.Now().Add(time.Hour * 24),
+	// 	HTTPOnly: true,
+	// }
 
-	c.Cookie(&cookie)
+	// c.Cookie(&cookie)
+
+	// return c.Status(http.StatusOK).JSON(fiber.Map{
+	// 	"message": "success",
+	// })
 
 	return c.Status(http.StatusOK).JSON(fiber.Map{
-		"message": "success",
+		"user":  user,
+		"token": token,
 	})
 }
 
@@ -162,14 +167,14 @@ func GetUsers(c *fiber.Ctx) error {
 	// find all students
 	users := make([]models.User, 0)
 	cursor, err := collection.Find(c.Context(), bson.M{})
-	if err != nil{
+	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"error": err.Error(),
 		})
 	}
 
 	// iterate over the cursor
-	for cursor.Next(c.Context()){
+	for cursor.Next(c.Context()) {
 		user := models.User{}
 		err := cursor.Decode(&user)
 		if err != nil {
@@ -204,12 +209,12 @@ func GetUsers(c *fiber.Ctx) error {
 
 func Logout(c *fiber.Ctx) error {
 	cookie := fiber.Cookie{
-		Name: "jwt",
-		Value: "",
-		Expires: time.Now().Add(-time.Hour),
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
 		HTTPOnly: true,
 	}
-	
+
 	c.Cookie(&cookie)
 
 	return c.Status(http.StatusOK).JSON(fiber.Map{
@@ -217,9 +222,9 @@ func Logout(c *fiber.Ctx) error {
 	})
 }
 
-func AuthRequestWithId(c *fiber.Ctx) (*jwt.RegisteredClaims, error){
+func AuthRequestWithId(c *fiber.Ctx) (*jwt.RegisteredClaims, error) {
 	id := c.Params("id")
-	if !primitive.IsValidObjectID(id){
+	if !primitive.IsValidObjectID(id) {
 		return nil, errors.New("unauthorized")
 	}
 	token := c.Locals("user").(*jwt.Token)
