@@ -3,3 +3,7 @@ export interface Course {
   name: string;
   description: string;
 }
+
+export interface GetCoursesResponse {
+  data: Course[];
+}

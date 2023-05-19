@@ -13,13 +13,13 @@ import {Modal, Form} from 'react-bootstrap';
 
 const Students = () => {
   const [students, setStudents] = useState<Student[] | null>([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState();
   const [showAddEditStudentDialog, setShowAddEditStudentDialog] =
     useState(false);
 
   useEffect(() => {
     getAllStudents()
-      .then((result) => setStudents(result))
+      .then((result) => setStudents(result!!))
       .catch((error) => setError(error));
   }, []);
 

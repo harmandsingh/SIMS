@@ -1,8 +1,8 @@
-import { Class } from "@/types/class";
+import { Course } from "@/types/course";
 import { Card, CardContent, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 
-const ClassCard = ({ id, name, courses, students }: Class) => {
+const CourseCard = ({ id, name, description }: Course) => {
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -16,26 +16,17 @@ const ClassCard = ({ id, name, courses, students }: Class) => {
     >
       <CardContent>
         <Typography
-          sx={{ fontSize: 26 }}
+          sx={{ fontSize: 22 }}
           fontWeight="bold"
           color="#21295c"
           gutterBottom
         >
           {name}
         </Typography>
-        <Typography color="#4d547d" sx={{ fontSize: 18 }}>
-          {courses
-            ? `Courses Offered: ${courses.length}`
-            : `Courses Offered: 0`}
-        </Typography>
-        <Typography color="#4d547d" sx={{ fontSize: 18 }}>
-          {students
-            ? `Total Students Enrolled: ${students.length}`
-            : `Total Students Enrolled: 0`}
-        </Typography>
+        <Typography color={theme.palette.grey[800]}>{description}</Typography>
       </CardContent>
     </Card>
   );
 };
 
-export default ClassCard;
+export default CourseCard;

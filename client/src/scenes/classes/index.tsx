@@ -24,7 +24,7 @@ const Classes = () => {
         <Box
           mt="25px"
           display="grid"
-          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          gridTemplateColumns="repeat(3, minmax(0, 1fr))"
           justifyContent="space-between"
           rowGap="20px"
           columnGap="1.75%"
