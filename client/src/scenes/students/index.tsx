@@ -5,17 +5,17 @@ import { Student } from "@/types/student";
 import { Box, Button, CircularProgress, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import AddEditStudentDialog from "@/components/data-grid-columns/addEditStudentDialog";
 import FlexBetween from "@/components/FlexBetween";
 import { Add } from "@mui/icons-material";
-import {Modal, Form} from 'react-bootstrap';
-
+import { Modal, Form } from "react-bootstrap";
+import AddStudentModal  from "@/components/AddStudentModal";
 
 const Students = () => {
   const [students, setStudents] = useState<Student[] | null>([]);
+  const [showStudentModal, setShowStudentModal] = useState(false);
+ 
   const [error, setError] = useState();
-  const [showAddEditStudentDialog, setShowAddEditStudentDialog] =
-    useState(false);
+  
 
   useEffect(() => {
     getAllStudents()
@@ -23,7 +23,6 @@ const Students = () => {
       .catch((error) => setError(error));
   }, []);
 
-  
   // const isNonMobile = useMediaQuery("(min-width: 1000px)");
   const theme = useTheme();
 
@@ -34,23 +33,8 @@ const Students = () => {
           title="Students"
           subtitle="List of currently enrolled students"
         />
-        <Button
-          onClick={() => setShowAddEditStudentDialog(true)}
-          variant="contained"
-        >
-          Add New Student          
-        </Button>
-        
-        
-        
+        <Button onClick={() => setShowStudentModal(true)}>Add New Student</Button>
       </FlexBetween>
-
-      <Box>
-
-      {showAddEditStudentDialog && 
-        <AddEditStudentDialog onDismiss={()=>setShowAddEditStudentDialog(false)} />}
-      </Box>
-
       <Box
         mt="25px"
         height="75vh"
@@ -72,7 +56,13 @@ const Students = () => {
           ) : (
             <CircularProgress color="secondary" />
           ))}
-      </Box>
+          </Box>
+      {showStudentModal && (
+        <AddStudentModal
+          showStudentModal={showStudentModal}
+          setShowStudentModal={setShowStudentModal}
+        />
+      )}
     </Box>
   );
 };
