@@ -2,9 +2,15 @@ import { getAllCourses } from "@/api/courses.service";
 import CourseCard from "@/components/CourseCard";
 import Header from "@/components/Header";
 import { Course } from "@/types/course";
-import { Box, Button, CircularProgress, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useEffect, useState } from "react";
-import FlexBetween from '@/components/FlexBetween';
+import FlexBetween from "@/components/FlexBetween";
 import AddCourseModal from "@/components/AddCourseModal";
 
 const Courses = () => {
@@ -27,7 +33,7 @@ const Courses = () => {
         <Header title="Courses" subtitle="All Courses in the school" />
 
         <Button onClick={() => setShowCourseModal(true)} variant="contained">
-          Add a course
+          Add New Course
         </Button>
       </FlexBetween>
       {courses ? (
@@ -61,9 +67,6 @@ const Courses = () => {
         />
       )}
     </Box>
-    
-      
-    
   );
 };
 
