@@ -7,3 +7,8 @@ export interface Course {
 export interface GetCoursesResponse {
   data: Course[];
 }
+
+
+export interface AddCourseResponse{
+  result: Course;
+}
