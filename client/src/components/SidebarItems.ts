@@ -1,7 +1,12 @@
-import { HomeOutlined, SvgIconComponent, Home } from "@mui/icons-material";
+import { Home, SvgIconComponent } from "@mui/icons-material";
+import CalculateIcon from "@mui/icons-material/Calculate";
+import CategoryIcon from "@mui/icons-material/Category";
 import ClassIcon from "@mui/icons-material/Class";
+import EqualizerIcon from "@mui/icons-material/Equalizer";
 import Face3Icon from "@mui/icons-material/Face3";
+import FunctionsIcon from "@mui/icons-material/Functions";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import PieChartIcon from "@mui/icons-material/PieChart";
 
 export interface NavItem {
   text: string;
@@ -21,30 +26,34 @@ export const NavItems = [
     icon: Face3Icon,
   } as NavItem,
   {
+    text: "Teachers",
+    icon: SupervisorAccountIcon,
+  } as NavItem,
+  {
     text: "Classes",
     icon: ClassIcon,
   } as NavItem,
   {
     text: "Courses",
-    icon: HomeOutlined,
-  } as NavItem,
-  {
-    text: "Attendance",
-    icon: HomeOutlined,
+    icon: CategoryIcon,
   } as NavItem,
   {
     text: "Grades",
-    icon: HomeOutlined,
+    icon: CalculateIcon,
   } as NavItem,
   {
-    text: "Management",
-  } as NavItem,
-  {
-    text: "Teachers",
-    icon: SupervisorAccountIcon,
+    text: "Performance",
   } as NavItem,
   {
     text: "Stats",
-    icon: HomeOutlined,
+    icon: FunctionsIcon,
+  } as NavItem,
+  {
+    text: "Attendance",
+    icon: EqualizerIcon,
+  } as NavItem,
+  {
+    text: "Students Info",
+    icon: PieChartIcon,
   } as NavItem,
 ];
