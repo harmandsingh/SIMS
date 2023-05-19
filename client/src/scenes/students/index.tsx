@@ -30,7 +30,7 @@ const Students = () => {
           title="Students"
           subtitle="List of currently enrolled students"
         />
-        <Button onClick={() => setShowStudentModal(true)}>
+        <Button variant="contained" onClick={() => setShowStudentModal(true)}>
           Add New Student
         </Button>
       </FlexBetween>
