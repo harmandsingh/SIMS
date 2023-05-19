@@ -1,11 +1,12 @@
 import { GridColDef } from "@mui/x-data-grid";
 
 export const StudentColumns: GridColDef[] = [
-  { field: "id", headerName: "ID", flex: 1 },
+  { field: "id", headerName: "ID", flex: 0.75 },
   { field: "name", headerName: "Name", flex: 0.75 },
   { field: "fatherName", headerName: "Father Name", flex: 0.75 },
   { field: "motherName", headerName: "Mother Name", flex: 0.75 },
   { field: "dob", headerName: "Date of Birth", flex: 0.5 },
+  { field: "gender", headerName: "Gender", flex: 0.25 },
   {
     field: "phoneNumber",
     headerName: "Phone Number",
