@@ -48,7 +48,7 @@ const Sidebar = ({
           sx={{
             width: drawerWidth,
             "& .MuiDrawer-paper": {
-              color: theme.palette.grey[900],
+              color: "#21295c",
               backgroundColor: theme.palette.primary.main,
               boxSizing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
@@ -66,7 +66,7 @@ const Sidebar = ({
                     fontWeight="bold"
                     ml="0.2rem"
                     mt="0.25rem"
-                    color={theme.palette.grey[900]}
+                    color="#21295c"
                   >
                     SIMS
                   </Typography>
@@ -86,6 +86,7 @@ const Sidebar = ({
                       fontSize="20px"
                       fontWeight="bold"
                       key={item.text}
+                      color="#21295"
                       sx={{ m: "2.25rem 0 1rem 3rem" }}
                     >
                       {item.text}
@@ -106,19 +107,13 @@ const Sidebar = ({
                           active === lcText
                             ? theme.palette.secondary.main
                             : "transparent",
-                        color:
-                          active === lcText
-                            ? theme.palette.common.black
-                            : theme.palette.common.black,
+                        color: active === lcText ? "#191F45" : "#191F45",
                       }}
                     >
                       <ListItemIcon
                         sx={{
                           ml: "1.25rem",
-                          color:
-                            active === lcText
-                              ? theme.palette.common.black
-                              : theme.palette.common.black,
+                          color: active === lcText ? "#21295c" : "#21295c",
                         }}
                       >
                         <item.icon sx={{ fontSize: 30 }} />

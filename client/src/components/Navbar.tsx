@@ -52,8 +52,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
         </FlexBetween>
 
         {/* Right Side */}
-        <FlexBetween gap="2rem" sx={{ color: theme.palette.grey[300] }}>
-          <Box sx={{ "&:hover": { color: theme.palette.primary[100] } }}>
+        <FlexBetween gap="2rem" sx={{ color: theme.palette.primary.main }}>
+          <Box sx={{ "&:hover": { color: theme.palette.secondary.main } }}>
             <Link
               to="/"
               onClick={() => setSelected("dashboard")}
@@ -65,10 +65,10 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
                 textDecoration: "inherit",
               }}
             >
-              Dashboard
+              Home
             </Link>
           </Box>
-          <Box sx={{ "&:hover": { color: theme.palette.primary[100] } }}>
+          {/* <Box sx={{ "&:hover": { color: theme.palette.primary[100] } }}>
             <Link
               to="/profile"
               onClick={() => setSelected("profile")}
@@ -80,8 +80,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
             >
               Profile
             </Link>
-          </Box>
-          <Box sx={{ "&:hover": { color: theme.palette.primary[100] } }}>
+          </Box> */}
+          <Box sx={{ "&:hover": { color: theme.palette.primary.main } }}>
             <Link
               to="/login"
               onClick={() => logout()}

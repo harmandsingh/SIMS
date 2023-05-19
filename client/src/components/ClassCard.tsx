@@ -16,19 +16,19 @@ const ClassCard = ({ id, name, courses, students }: Class) => {
     >
       <CardContent>
         <Typography
-          sx={{ fontSize: 22 }}
+          sx={{ fontSize: 26 }}
           fontWeight="bold"
           color="#21295c"
           gutterBottom
         >
           {name}
         </Typography>
-        <Typography color={theme.palette.grey[800]}>
+        <Typography color="#4d547d" sx={{ fontSize: 18 }}>
           {courses
             ? `Courses Offered: ${courses.length}`
             : `Courses Offered: 0`}
         </Typography>
-        <Typography color={theme.palette.grey[800]}>
+        <Typography color="#4d547d" sx={{ fontSize: 18 }}>
           {students
             ? `Total Students Enrolled: ${students.length}`
             : `Total Students Enrolled: 0`}
