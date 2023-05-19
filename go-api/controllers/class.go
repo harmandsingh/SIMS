@@ -127,8 +127,19 @@ func UpdateClass(c *fiber.Ctx) error {
 		})
 	}
 
-	// If id is valid update the class object
+	// If id is valid get the class object to get the current list of students
 	collection := config.GetDBCollection("classes")
+	classDB := models.Class{}
+
+	err = collection.FindOne(c.Context(), bson.M{"_id": objectId}).Decode(&classDB)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(utils.NewJError(err))
+	}
+	
+	if(classDB.Students != nil) {
+		class.Students =  append(class.Students, classDB.Students...)
+	}
+
 	result, err := collection.UpdateOne(c.Context(), bson.M{"_id": objectId}, bson.M{"$set": class})
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(utils.NewJError(err))
