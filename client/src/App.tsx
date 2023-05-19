@@ -7,6 +7,7 @@ import Layout from "./scenes/layout";
 import Students from "./scenes/students";
 import Courses from "./scenes/courses";
 import Classes from "./scenes/classes";
+import Homepage from "./scenes/pages/homepage";
 
 export const isAuthenticated = () => {
   if (localStorage.getItem("user")) {
@@ -41,6 +42,7 @@ function App() {
                   element={<Navigate to="/dashboard" replace />}
                 />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/homepage" element={<Homepage />} />
                 <Route path="/students" element={<Students />} />
                 <Route path="/classes" element={<Classes />} />
                 <Route path="/courses" element={<Courses />} />
