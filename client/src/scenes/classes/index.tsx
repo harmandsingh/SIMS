@@ -18,7 +18,7 @@ const Classes = () => {
   }, []);
 
   return (
-    <Box m="2rem 1.25rem">
+    <Box m="1.5rem 1.25rem">
       <Header title="Classes" subtitle="All classes in the school" />
       {classes ? (
         <Box

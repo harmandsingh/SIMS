@@ -17,7 +17,8 @@ const ClassCard = ({ id, name, courses, students }: Class) => {
       <CardContent>
         <Typography
           sx={{ fontSize: 22 }}
-          color={theme.palette.common.black}
+          fontWeight="bold"
+          color="#21295c"
           gutterBottom
         >
           {name}
