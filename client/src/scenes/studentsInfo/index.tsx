@@ -1,6 +1,7 @@
-import FlexBetween from "@/components/FlexBetween";
-import Header from "@/components/Header";
+import { getAllStudents } from "@/api/students.service";
+import { Student } from "@/types/student";
 import { Box, Typography, useTheme } from "@mui/material";
+import { useEffect, useState } from "react";
 import {
   Cell,
   Legend,
@@ -10,19 +11,46 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  { name: "Boy", value: 300 },
-  { name: "Girl", value: 470 },
-];
+// const data = [
+//   { name: "Boy", value: 300 },
+//   { name: "Girl", value: 470 },
+// ];
 
 const StudentsInfo = () => {
   const theme = useTheme();
+  const [students, setStudents] = useState<Student[] | null>([]);
+  const [error, setError] = useState();
+
+  function isBoy(student: Student) {
+    return student.gender === "M";
+  }
+
+  let numBoys = 0;
+  let numGirls = 0;
+
+  if (students) {
+    numBoys = students?.filter(isBoy).length;
+    numGirls = students?.length - numBoys;
+  }
+
+  const data = [
+    { name: "Boy", value: numBoys },
+    { name: "Girl", value: numGirls },
+  ];
+
   const COLORS = [theme.palette.primary.main, theme.palette.secondary.main];
+
+  useEffect(() => {
+    getAllStudents()
+      .then((result) => setStudents(result!!))
+      .catch((error) => setError(error));
+  }, []);
+
   return (
     <Box height="100%" width="100%">
       <Typography
         variant="h3"
-        m="1.5rem 1.25rem"
+        m="1.5rem 14rem"
         fontWeight="bold"
         color={theme.palette.secondary.main}
       >
@@ -33,7 +61,7 @@ const StudentsInfo = () => {
           <Pie
             dataKey="value"
             data={data}
-            cx="55%"
+            cx="60%"
             cy="50%"
             innerRadius={125}
             outerRadius={250}

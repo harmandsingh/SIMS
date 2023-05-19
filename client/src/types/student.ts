@@ -4,6 +4,7 @@ export interface Student {
   fatherName: string;
   motherName: string;
   dob: string;
+  gender: string;
   phoneNumber: string;
   streetAddress: string;
   city: string;
