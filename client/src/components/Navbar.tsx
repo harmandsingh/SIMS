@@ -70,15 +70,15 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
           </Box>
           {/* <Box sx={{ "&:hover": { color: theme.palette.primary[100] } }}>
             <Link
-              to="/profile"
-              onClick={() => setSelected("profile")}
+              to="/homepage"
+              onClick={() => setSelected("homepage")}
               style={{
                 color:
-                  selected === "profile" ? "inherit" : theme.palette.grey[700],
+                  selected === "homepage" ? "inherit" : theme.palette.grey[700],
                 textDecoration: "inherit",
               }}
             >
-              Profile
+              Homepage
             </Link>
           </Box> */}
           <Box sx={{ "&:hover": { color: theme.palette.primary.main } }}>
