@@ -43,7 +43,7 @@ func run() error {
 	app.Use(recover.New())
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
-		AllowOrigins: "http://127.0.0.1:5173",
+		AllowOrigins:     "http://127.0.0.1:5173, http://localhost:5173",
 	}))
 
 	// add routes
