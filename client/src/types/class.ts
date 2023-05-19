@@ -7,7 +7,7 @@ export interface Class {
   students: EnrolledStudent[];
 }
 
-interface EnrolledStudent {
+export interface EnrolledStudent {
   id: string;
   name: string;
 }
