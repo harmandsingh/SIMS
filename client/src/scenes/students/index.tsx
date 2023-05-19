@@ -1,21 +1,18 @@
 import { getAllStudents } from "@/api/students.service";
+import AddStudentModal from "@/components/AddStudentModal";
+import FlexBetween from "@/components/FlexBetween";
 import Header from "@/components/Header";
 import { StudentColumns } from "@/components/data-grid-columns/students";
 import { Student } from "@/types/student";
 import { Box, Button, CircularProgress, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import FlexBetween from "@/components/FlexBetween";
-import { Add } from "@mui/icons-material";
-import { Modal, Form } from "react-bootstrap";
-import AddStudentModal  from "@/components/AddStudentModal";
 
 const Students = () => {
   const [students, setStudents] = useState<Student[] | null>([]);
   const [showStudentModal, setShowStudentModal] = useState(false);
- 
+
   const [error, setError] = useState();
-  
 
   useEffect(() => {
     getAllStudents()
@@ -33,7 +30,9 @@ const Students = () => {
           title="Students"
           subtitle="List of currently enrolled students"
         />
-        <Button onClick={() => setShowStudentModal(true)}>Add New Student</Button>
+        <Button onClick={() => setShowStudentModal(true)}>
+          Add New Student
+        </Button>
       </FlexBetween>
       <Box
         mt="25px"
@@ -56,7 +55,7 @@ const Students = () => {
           ) : (
             <CircularProgress color="secondary" />
           ))}
-          </Box>
+      </Box>
       {showStudentModal && (
         <AddStudentModal
           showStudentModal={showStudentModal}

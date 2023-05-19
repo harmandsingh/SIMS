@@ -11,11 +11,6 @@ import {
   Tooltip,
 } from "recharts";
 
-// const data = [
-//   { name: "Boy", value: 300 },
-//   { name: "Girl", value: 470 },
-// ];
-
 const StudentsInfo = () => {
   const theme = useTheme();
   const [students, setStudents] = useState<Student[] | null>([]);
@@ -79,6 +74,7 @@ const StudentsInfo = () => {
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>
+      {error && { error }}
     </Box>
   );
 };

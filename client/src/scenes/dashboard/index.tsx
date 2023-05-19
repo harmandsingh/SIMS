@@ -85,16 +85,6 @@ const Dashboard = () => {
           icon={ClassIcon}
         />
       </Box>
-      <>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart width={600} height={600} data={data}>
-            <Bar dataKey="students" fill={theme.palette.primary.main} />
-            {/* <CartesianGrid stroke={theme.palette.primary.main} /> */}
-            <XAxis dataKey="name" />
-            <YAxis />
-          </BarChart>
-        </ResponsiveContainer>
-      </>
     </Box>
   );
 };

@@ -4,14 +4,7 @@ import FlexBetween from "@/components/FlexBetween";
 import Header from "@/components/Header";
 import { TeacherColumns } from "@/components/data-grid-columns/teachers";
 import { Teacher } from "@/types/teacher";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Modal,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, CircularProgress, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 
@@ -32,7 +25,9 @@ const Teachers = () => {
     <Box m="1.5rem 1.25rem">
       <FlexBetween>
         <Header title="Teachers" subtitle="Total Teachers Count" />
-        <Button onClick={() => setShowStudentModal(true)}>Add Student</Button>
+        <Button onClick={() => setShowStudentModal(true)}>
+          Add New Teacher
+        </Button>
       </FlexBetween>
       <Box
         mt="25px"
