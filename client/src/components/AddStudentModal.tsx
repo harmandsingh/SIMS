@@ -316,7 +316,7 @@ const AddStudentModal = ({
               label="state"
               variant="outlined"
               error={!!errors.state}
-              helperText={errors.state ? errors.city?.state : ""}
+              helperText={errors.state ? errors.city?.message : ""}
               margin="normal"
               fullWidth
               required
