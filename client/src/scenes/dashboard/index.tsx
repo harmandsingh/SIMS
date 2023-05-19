@@ -17,7 +17,13 @@ import { getAllClasses } from "@/api/classes.service";
 import { Teacher } from "@/types/teacher";
 import { getAllTeachers } from "@/api/teachers.service";
 
+import { PieChart, Pie, Sector, Cell, LineChart, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, Legend } from 'recharts';
+import DashboardBox from "@/components/DashboardBox";
+import { attendance } from "@/studentData/data";
+import { Palette } from "@mui/material";
+
 const Dashboard = () => {
+  const palette = useTheme();
   const theme = useTheme();
   const navigate = useNavigate();
   const userName = getUsername();
@@ -47,6 +53,8 @@ const Dashboard = () => {
       .then((result) => setClasses(result))
       .catch((error) => setError(error));
   }, []);
+
+
 
   return (
     <Box m="1.5rem 1.25rem">
@@ -81,7 +89,9 @@ const Dashboard = () => {
           description="Total Class Count"
           icon={ClassIcon}
         />
+      
       </Box>
+      
     </Box>
   );
 };
