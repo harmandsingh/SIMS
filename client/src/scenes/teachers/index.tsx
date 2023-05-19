@@ -1,13 +1,23 @@
 import { getAllTeachers } from "@/api/teachers.service";
+import AddStudenModal from "@/components/AddTeacherModal";
+import FlexBetween from "@/components/FlexBetween";
 import Header from "@/components/Header";
 import { TeacherColumns } from "@/components/data-grid-columns/teachers";
 import { Teacher } from "@/types/teacher";
-import { Box, CircularProgress, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Modal,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState<Teacher[] | null>([]);
+  const [showStudentModal, setShowStudentModal] = useState(false);
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -20,7 +30,10 @@ const Teachers = () => {
 
   return (
     <Box m="1.5rem 1.25rem">
-      <Header title="Teachers" subtitle="Total Teachers Count" />
+      <FlexBetween>
+        <Header title="Teachers" subtitle="Total Teachers Count" />
+        <Button onClick={() => setShowStudentModal(true)}>Add Student</Button>
+      </FlexBetween>
       <Box
         mt="25px"
         height="75vh"
@@ -43,6 +56,12 @@ const Teachers = () => {
             <CircularProgress color="secondary" />
           ))}
       </Box>
+      {showStudentModal && (
+        <AddStudenModal
+          showStudentModal={showStudentModal}
+          setShowStudentModal={setShowStudentModal}
+        />
+      )}
     </Box>
   );
 };
