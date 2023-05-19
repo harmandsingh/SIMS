@@ -22,11 +22,11 @@ const StatBox = ({ title, value, icon, description }: StatBoxProps) => {
         p: "1.25rem 1rem",
         flex: "1 1 100%",
         backgroundColor: theme.palette.primary.main,
-        borderRadius: "0.55rem",
+        borderRadius: "0.75rem",
       }}
     >
       <FlexBetween>
-        <Typography variant="h4" fontWeight={600} color="#21295c">
+        <Typography variant="h5" fontWeight={600} color="#21295c">
           {title}
         </Typography>
         <SvgIcon
@@ -38,7 +38,7 @@ const StatBox = ({ title, value, icon, description }: StatBoxProps) => {
         />
       </FlexBetween>
       <Typography
-        variant="h3"
+        variant="h4"
         fontWeight="bold"
         color={theme.palette.secondary.dark}
       >
