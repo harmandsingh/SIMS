@@ -7,6 +7,7 @@ import Face3Icon from "@mui/icons-material/Face3";
 import FunctionsIcon from "@mui/icons-material/Functions";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import PieChartIcon from "@mui/icons-material/PieChart";
+import AssessmentIcon from "@mui/icons-material/Assessment";
 
 export interface NavItem {
   text: string;
@@ -55,5 +56,9 @@ export const NavItems = [
   {
     text: "Students Info",
     icon: PieChartIcon,
+  } as NavItem,
+  {
+    text: "Student Class Ratio",
+    icon: AssessmentIcon,
   } as NavItem,
 ];
