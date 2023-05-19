@@ -25,7 +25,7 @@ const Teachers = () => {
     <Box m="1.5rem 1.25rem">
       <FlexBetween>
         <Header title="Teachers" subtitle="Total Teachers Count" />
-        <Button onClick={() => setShowStudentModal(true)}>
+        <Button variant="contained" onClick={() => setShowStudentModal(true)}>
           Add New Teacher
         </Button>
       </FlexBetween>

@@ -1,7 +1,9 @@
+import { isAuthenticated } from "@/App";
 import { getAllStudents } from "@/api/students.service";
 import { Student } from "@/types/student";
 import { Box, Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Cell,
   Legend,
@@ -13,6 +15,7 @@ import {
 
 const StudentsInfo = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [students, setStudents] = useState<Student[] | null>([]);
   const [error, setError] = useState();
 
@@ -36,8 +39,17 @@ const StudentsInfo = () => {
   const COLORS = [theme.palette.primary.main, theme.palette.secondary.main];
 
   useEffect(() => {
+    // Check if the user is authenticated
+    if (!isAuthenticated()) {
+      navigate("/login");
+    }
+
     getAllStudents()
-      .then((result) => setStudents(result!!))
+      .then((result) => {
+        if (result) {
+          setStudents(result);
+        }
+      })
       .catch((error) => setError(error));
   }, []);
 
@@ -45,11 +57,11 @@ const StudentsInfo = () => {
     <Box height="100%" width="100%">
       <Typography
         variant="h3"
-        m="1.5rem 14rem"
+        m="1.5rem 1.25rem"
         fontWeight="bold"
         color={theme.palette.secondary.main}
       >
-        Students Comparison By Gender
+        Student Count Comparison By Gender
       </Typography>
       <ResponsiveContainer width="80%" height="80%">
         <PieChart width={800} height={800}>

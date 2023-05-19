@@ -60,7 +60,7 @@ import {
 //   },
 // ];
 
-interface classBarData {
+export interface ClassBarData {
   name: string;
   studentCount: number;
 }
@@ -71,10 +71,10 @@ const StudentClassRatio = () => {
   const [error, setError] = useState();
   const COLORS = [theme.palette.primary.main, theme.palette.secondary.main];
 
-  let data: classBarData[] = [];
+  let data: ClassBarData[] = [];
 
   function getSingleClass(singleClass: Class) {
-    const classData: classBarData = {
+    const classData: ClassBarData = {
       name: singleClass.name,
       studentCount: singleClass.students.length,
     };
@@ -85,13 +85,13 @@ const StudentClassRatio = () => {
     classes.map((singleClass) => {
       if (singleClass) {
         if (singleClass.students) {
-          const result: classBarData = {
+          const result: ClassBarData = {
             name: singleClass.name,
             studentCount: singleClass.students.length,
           };
           data.push(result);
         } else {
-          const result: classBarData = {
+          const result: ClassBarData = {
             name: singleClass.name,
             studentCount: 0,
           };
@@ -102,7 +102,9 @@ const StudentClassRatio = () => {
   }
 
   useEffect(() => {
-    getAllClasses().then((response) => setClasses(response));
+    getAllClasses().then((response) => {
+      response && setClasses(response);
+    });
   }, []);
 
   return (
