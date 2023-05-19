@@ -17,3 +17,7 @@ export interface TeachingClasses {
 export interface GetTeachersResponse {
   data: Teacher[];
 }
+
+export interface AddTeacherResponse {
+  result: Teacher;
+}

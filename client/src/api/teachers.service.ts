@@ -1,7 +1,8 @@
 import axios, { AxiosError } from "axios";
 import { API_URL, logout } from "./auth.service";
 import authHeader from "./auth.header";
-import { GetTeachersResponse } from "@/types/teacher";
+import { AddTeacherResponse, GetTeachersResponse } from "@/types/teacher";
+import { AddTeacherFormInputs } from "@/components/AddTeacherModal";
 
 export const getAllTeachers = async () => {
   return await axios
@@ -12,4 +13,22 @@ export const getAllTeachers = async () => {
         logout();
       }
     });
+};
+
+export const addTeacher = async ({
+  name,
+  email,
+  dob,
+  teachingCourses,
+  teachingClasses,
+}: AddTeacherFormInputs) => {
+  const response = await axios.post<AddTeacherResponse>(API_URL + "teachers", {
+    name,
+    email,
+    dob,
+    teachingCourses,
+    teachingClasses,
+  });
+
+  return response.data.result;
 };
