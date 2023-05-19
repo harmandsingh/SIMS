@@ -5,7 +5,7 @@ import { GetTeachersResponse } from "@/types/teacher";
 
 export const getAllTeachers = async () => {
   return await axios
-    .get<GetTeachersResponse>(API_URL + "students", { headers: authHeader() })
+    .get<GetTeachersResponse>(API_URL + "teachers", { headers: authHeader() })
     .then((response) => response.data.data)
     .catch((error: AxiosError) => {
       if (error.code === AxiosError.ERR_BAD_REQUEST) {
