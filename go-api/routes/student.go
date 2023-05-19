@@ -12,6 +12,6 @@ func AddStudentGroup(app *fiber.App){
 	studentGroup.Get("/", AuthRequired, controllers.GetStudents)
 	studentGroup.Get("/:id", AuthRequired, controllers.GetStudent)
 	studentGroup.Post("/", AuthRequired, controllers.CreateStudent)
-	studentGroup.Put("/", AuthRequired, controllers.UpdateStudent)
+	studentGroup.Put("/:id", AuthRequired, controllers.UpdateStudent)
 	studentGroup.Delete("/", AuthRequired, controllers.DeleteStudent)
 }

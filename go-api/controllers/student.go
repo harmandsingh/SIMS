@@ -106,6 +106,7 @@ type updateStudentDTO struct {
 	FatherName string `json:"fatherName,omitempty" bson:"fatherName,omitempty"`
 	MotherName string `json:"motherName,omitempty" bson:"motherName,omitempty"`
 	DOB string `json:"dob,omitempty" bson:"dob,omitempty"`
+	Gender string `json:"gender,omitempty" bson:"gender,omitempty"`
 	PhoneNumber string `json:"phoneNumber,omitempty" bson:"phoneNumber,omitempty"`
 	StreetAddress string `json:"streetAddress,omitempty" bson:"streetAddress,omitempty"`
 	City string `json:"city,omitempty" bson:"city,omitempty"`
