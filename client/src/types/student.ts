@@ -26,6 +26,7 @@ export interface EnrolledCourses {
 
 export interface GetStudentsResponse {
   data: Student[];
+  error?: string;
 }
 
 export interface AddStudentResponse {
