@@ -12,7 +12,7 @@ const Students = () => {
 
   useEffect(() => {
     getAllStudents()
-      .then((result) => setStudents(result))
+      .then((result) => setStudents(result!!))
       .catch((error) => setError(error));
   }, []);
 

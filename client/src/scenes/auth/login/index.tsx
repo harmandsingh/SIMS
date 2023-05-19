@@ -67,7 +67,7 @@ const Login = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          bgcolor: theme.palette.grey[800],
+          bgcolor: "#21295c",
           borderRadius: "12px",
         }}
       >

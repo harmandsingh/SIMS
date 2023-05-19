@@ -1,21 +1,26 @@
 import { getUsername, isAuthenticated } from "@/App";
+import { getAllClasses } from "@/api/classes.service";
 import { getAllStudents } from "@/api/students.service";
-import FlexBetween from "@/components/FlexBetween";
+import { getAllTeachers } from "@/api/teachers.service";
+import BarChartComponent from "@/components/BarChart";
+import DashboardBox from "@/components/DashboardBox";
 import Header from "@/components/Header";
 import StatBox from "@/components/Statbox";
+import { Class } from "@/types/class";
 import { Student } from "@/types/student";
+import { Teacher } from "@/types/teacher";
+import ClassIcon from "@mui/icons-material/Class";
+import Face3Icon from "@mui/icons-material/Face3";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PersonIcon from "@mui/icons-material/Person";
-import PeopleIcon from "@mui/icons-material/People";
-import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-import Face3Icon from "@mui/icons-material/Face3";
-import ClassIcon from "@mui/icons-material/Class";
-import { Class } from "@/types/class";
-import { getAllClasses } from "@/api/classes.service";
-import { Teacher } from "@/types/teacher";
-import { getAllTeachers } from "@/api/teachers.service";
+import { Bar, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+
+const data = [
+  { name: "Boy", value: 400 },
+  { name: "Girl", value: 300 },
+];
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -36,11 +41,11 @@ const Dashboard = () => {
 
     // Get all students
     getAllStudents()
-      .then((result) => setStudents(result))
+      .then((result) => setStudents(result!!))
       .catch((error) => setError(error));
 
     getAllTeachers()
-      .then((result) => setTeachers(result))
+      .then((result) => setTeachers(result!!))
       .catch((error) => setError(error));
 
     getAllClasses()
@@ -82,6 +87,7 @@ const Dashboard = () => {
           icon={ClassIcon}
         />
       </Box>
+      <BarChartComponent />
     </Box>
   );
 };
