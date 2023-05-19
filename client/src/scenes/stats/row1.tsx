@@ -93,7 +93,6 @@ const attendance = [
   },
 ];
 
-
 const ratio = [
   {
     classname: "class IV",
@@ -140,14 +139,14 @@ const ratio = [
 ];
 
 const Row1 = (props: Props) => {
-  const { palette } = useTheme();
+  const theme = useTheme();
 
   return (
     <>
       <DashboardBox gridArea="a">
         <BoxHeader
           title="Student's attendance: "
-          // subtitle="The lines represents current and previous year attendance."
+          //subtitle="The lines represents current and previous year attendance."
           sideText="Increases by  +14%"
         />
 
@@ -167,24 +166,24 @@ const Row1 = (props: Props) => {
               <linearGradient id="colorCurrent" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor={palette.primary[300]}
+                  stopColor={theme.palette.primary[300]}
                   stopOpacity={0.5}
                 />
                 <stop
                   offset="95%"
-                  stopColor={palette.primary[300]}
+                  stopColor={theme.palette.primary[300]}
                   stopOpacity={0}
                 />
               </linearGradient>
               <linearGradient id="colorPrevious" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor={palette.primary[300]}
+                  stopColor={theme.palette.primary[300]}
                   stopOpacity={0.5}
                 />
                 <stop
                   offset="95%"
-                  stopColor={palette.primary[300]}
+                  stopColor={theme.palette.primary[300]}
                   stopOpacity={0}
                 />
               </linearGradient>
@@ -205,21 +204,21 @@ const Row1 = (props: Props) => {
               type="monotone"
               dataKey="presentStu"
               dot={true}
-              stroke={palette.secondary.main}
+              stroke={theme.palette.secondary.main}
               fill="url(#colorCurrent)"
             />
             <Area
               type="monotone"
               dataKey="previous"
               dot={true}
-              stroke={palette.secondary.main}
+              stroke={theme.palette.secondary.main}
               fill="url(#colorPrevious)"
             />
           </AreaChart>
         </ResponsiveContainer>
       </DashboardBox>
 
-      <DashboardBox gridArea="b">
+      {/* <DashboardBox gridArea="b">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={500}
@@ -236,24 +235,24 @@ const Row1 = (props: Props) => {
               <linearGradient id="colorCurrent" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor={palette.primary[300]}
+                  stopColor={theme.palette.primary[300]}
                   stopOpacity={0.5}
                 />
                 <stop
                   offset="95%"
-                  stopColor={palette.primary[300]}
+                  stopColor={theme.palette.primary[300]}
                   stopOpacity={0}
                 />
               </linearGradient>
               <linearGradient id="colorPrevious" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor={palette.primary[300]}
+                  stopColor={theme.palette.primary[300]}
                   stopOpacity={0.5}
                 />
                 <stop
                   offset="95%"
-                  stopColor={palette.primary[300]}
+                  stopColor={theme.palette.primary[300]}
                   stopOpacity={0}
                 />
               </linearGradient>
@@ -274,23 +273,23 @@ const Row1 = (props: Props) => {
               type="monotone"
               dataKey="presentStu"
               dot={true}
-              stroke={palette.secondary.main}
+              stroke={theme.palette.secondary.main}
               fill="url(#colorCurrent)"
             />
             <Line
               type="monotone"
               dataKey="previous"
               dot={true}
-              stroke={palette.secondary.main}
+              stroke={theme.palette.secondary.main}
               fill="url(#colorPrevious)"
             />
           </LineChart>
         </ResponsiveContainer>
-      </DashboardBox>
+      </DashboardBox> */}
 
-      <DashboardBox gridArea="c">
+      <DashboardBox gridArea="b">
         <BoxHeader title="Student to faculty ratio for each class:" />
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="95%" height="95%">
           <BarChart
             width={500}
             height={400}
@@ -302,7 +301,7 @@ const Row1 = (props: Props) => {
               bottom: 50,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
+            {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <XAxis dataKey="classname" tickLine={false} />
             <YAxis />
             <Tooltip />

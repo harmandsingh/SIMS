@@ -1,39 +1,29 @@
 import { Box, useMediaQuery } from "@mui/material";
 import Row1 from "./row1";
 import Row2 from "./row2";
-import Row3 from "./row3";
+import Row3 from "./row2";
 
 //type Props = {};
 
 const gridTemplateLargeScreens = `
- "a b c"
- "a b c"
- "a b c"
- 
- 
- "d h i"
- "g h i"
- "g h i"
- "g h i"
+ "a a b"
+ "a a b"
+ "a a b"
+ "a a b"
+ "a a b"
+ "c d d"
+ "c d d"
+ "c d d"
+ "c d d"
 `;
 
 const gridTemplateSmallScreens = `
  "a"
  "a"
- "b"
- "b"
- "b"
- "b"
+ "a"
  "c"
  "c"
  "c"
- "d"
- "d"
- "d"
- "e"
- "f"
- "f"
- "f"
  "g"
  "g"
  "g"
@@ -41,10 +31,6 @@ const gridTemplateSmallScreens = `
  "h"
  "h"
  "h"
- "i"
- "i"
- "j"
- "j"
 `;
 
 const Stats = () => {
@@ -56,6 +42,7 @@ const Stats = () => {
       height="100%"
       display="grid"
       gap="1.5rem"
+      m="1.5rem 0 0 0"
       sx={
         isAboveMediumScreens
           ? {
@@ -71,8 +58,7 @@ const Stats = () => {
       }
     >
       <Row1 />
-     
-      <Row3 />
+      <Row2 />
     </Box>
   );
 };
