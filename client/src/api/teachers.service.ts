@@ -1,8 +1,8 @@
-import axios, { AxiosError } from "axios";
-import { API_URL, logout } from "./auth.service";
-import authHeader from "./auth.header";
-import { AddTeacherResponse, GetTeachersResponse } from "@/types/teacher";
 import { AddTeacherFormInputs } from "@/components/AddTeacherModal";
+import { AddTeacherResponse, GetTeachersResponse } from "@/types/teacher";
+import axios, { AxiosError } from "axios";
+import authHeader from "./auth.header";
+import { API_URL, logout } from "./auth.service";
 
 export const getAllTeachers = async () => {
   return await axios
@@ -22,13 +22,18 @@ export const addTeacher = async ({
   teachingCourses,
   teachingClasses,
 }: AddTeacherFormInputs) => {
-  const response = await axios.post<AddTeacherResponse>(API_URL + "teachers", {
-    name,
-    email,
-    dob,
-    teachingCourses,
-    teachingClasses,
-  });
-
-  return response.data.result;
+  return await axios
+    .post<AddTeacherResponse>(API_URL + "teachers", {
+      name,
+      email,
+      dob,
+      teachingCourses,
+      teachingClasses,
+    })
+    .then((response) => response.data.result)
+    .catch((error: AxiosError) => {
+      if (error.code === AxiosError.ERR_BAD_REQUEST) {
+        logout();
+      }
+    });
 };
