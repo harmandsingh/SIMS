@@ -20,7 +20,7 @@ const Students = () => {
   const theme = useTheme();
 
   return (
-    <Box m="2rem 1.25rem">
+    <Box m="1.5rem 1.25rem">
       <Header title="Students" subtitle="List of currently enrolled students" />
       <Box
         mt="25px"
