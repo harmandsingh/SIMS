@@ -11,6 +11,7 @@ import Students from "./scenes/students";
 import Teachers from "./scenes/teachers";
 import Attendance from "./scenes/attendance";
 import StudentsInfo from "./scenes/studentsInfo";
+import StudentClassRatio from "./scenes/studentClassRatio";
 
 export const isAuthenticated = () => {
   if (localStorage.getItem("user")) {
@@ -52,6 +53,10 @@ function App() {
                 <Route path="/stats" element={<Stats />} />
                 <Route path="/attendance" element={<Attendance />} />
                 <Route path="/studentsinfo" element={<StudentsInfo />} />
+                <Route
+                  path="/studentclassratio"
+                  element={<StudentClassRatio />}
+                />
                 <Route path="*" element={<Navigate to="/dashboard" />} />
               </Route>
             </Routes>
