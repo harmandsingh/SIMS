@@ -67,8 +67,8 @@ func GetCourse(c *fiber.Ctx) error {
 	})
 }
 
-type createCourseDTO struct{
-	Name string `json:"name" bson:"name" validate:"required"`
+type createCourseDTO struct {
+	Name        string `json:"name" bson:"name" validate:"required"`
 	Description string `json:"description" bson:"description" validate:"required"`
 }
 
@@ -76,7 +76,7 @@ func CreateCourse(c *fiber.Ctx) error {
 	// Validate the course body
 	course := new(createCourseDTO)
 	if err := c.BodyParser(course); err != nil {
-		return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "Invalid body",})
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "Invalid body"})
 	}
 
 	// Create course
@@ -84,19 +84,19 @@ func CreateCourse(c *fiber.Ctx) error {
 	result, err := collection.InsertOne(c.Context(), course)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to create book",
+			"error":   "Failed to create book",
 			"message": err.Error(),
 		})
 	}
-	
+
 	// Return the created course
 	return c.Status(http.StatusCreated).JSON(fiber.Map{
 		"result": result,
 	})
 }
 
-type updateCourseDTO struct{
-	Name string `json:"name,omitempty" bson:"name,omitempty"`
+type updateCourseDTO struct {
+	Name        string `json:"name,omitempty" bson:"name,omitempty"`
 	Description string `json:"description,omitempty" bson:"description,omitempty"`
 }
 
@@ -129,7 +129,7 @@ func UpdateCourse(c *fiber.Ctx) error {
 	result, err := collection.UpdateOne(c.Context(), bson.M{"_id": objectId}, bson.M{"$set": course})
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to update course",
+			"error":   "Failed to update course",
 			"message": err.Error(),
 		})
 	}
@@ -162,7 +162,7 @@ func DeleteCourse(c *fiber.Ctx) error {
 	result, err := collection.DeleteOne(c.Context(), bson.M{"_id": objectId})
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to delete the course",
+			"error":   "Failed to delete the course",
 			"message": err.Error(),
 		})
 	}
