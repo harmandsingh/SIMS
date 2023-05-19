@@ -71,7 +71,9 @@ const AddStudentModal = ({
       const response = await addStudent(data);
 
       // Set the response
-      setResponse(response);
+      if (response) {
+        setResponse(response);
+      }
 
       // Close the modal
       setShowStudentModal(false);
