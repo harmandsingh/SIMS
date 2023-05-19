@@ -1,8 +1,5 @@
 import { Box, useTheme } from "@mui/material";
 import {
-  Bar,
-  BarChart,
-  CartesianGrid,
   Legend,
   Line,
   LineChart,

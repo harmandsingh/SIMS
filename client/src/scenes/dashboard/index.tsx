@@ -2,8 +2,6 @@ import { getUsername, isAuthenticated } from "@/App";
 import { getAllClasses } from "@/api/classes.service";
 import { getAllStudents } from "@/api/students.service";
 import { getAllTeachers } from "@/api/teachers.service";
-import BarChartComponent from "@/components/BarChart";
-import DashboardBox from "@/components/DashboardBox";
 import Header from "@/components/Header";
 import StatBox from "@/components/Statbox";
 import { Class } from "@/types/class";
@@ -15,18 +13,7 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Bar,
-  BarChart,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import Row1 from "../stats/row1";
-import Row2 from "../stats/row2";
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 const data = [
   { name: "Boy", value: 400 },
@@ -34,7 +21,6 @@ const data = [
 ];
 
 const Dashboard = () => {
-  const palette = useTheme();
   const theme = useTheme();
   const navigate = useNavigate();
   const userName = getUsername();
