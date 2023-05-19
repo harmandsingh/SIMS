@@ -1,11 +1,15 @@
 import { getAllClasses } from "@/api/classes.service";
+import ClassCard from "@/components/ClassCard";
+import Header from "@/components/Header";
 import { Class } from "@/types/class";
-import { Box, Card, CardContent, Typography, useTheme } from "@mui/material";
+import { Box, CircularProgress, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const Classes = () => {
   const [classes, setClasses] = useState<Class[] | null>([]);
   const [error, setError] = useState();
+  const theme = useTheme();
+  const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
   useEffect(() => {
     getAllClasses()
@@ -13,15 +17,34 @@ const Classes = () => {
       .catch((error) => setError(error));
   }, []);
 
-  const theme = useTheme();
-
   return (
     <Box m="2rem 1.25rem">
-      <Card>
-        <CardContent>
-          <Typography>{classes?.at(0)?.name}</Typography>
-        </CardContent>
-      </Card>
+      <Header title="Classes" subtitle="All classes in the school" />
+      {classes ? (
+        <Box
+          mt="25px"
+          display="grid"
+          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          justifyContent="space-between"
+          rowGap="20px"
+          columnGap="1.75%"
+          sx={{
+            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+          }}
+        >
+          {classes.map(({ id, name, courses, students }: Class) => (
+            <ClassCard
+              key={id}
+              id={id}
+              name={name}
+              courses={courses}
+              students={students}
+            />
+          ))}
+        </Box>
+      ) : (
+        <CircularProgress color="secondary" />
+      )}
     </Box>
   );
 };

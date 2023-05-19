@@ -52,8 +52,6 @@ const Login = () => {
     }
   };
 
-  console.log(response);
-
   useEffect(() => {
     if (localStorage.getItem("user")) {
       navigate("/dashboard");
@@ -69,17 +67,17 @@ const Login = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          bgcolor: theme.palette.primary.main,
+          bgcolor: theme.palette.grey[800],
           borderRadius: "12px",
         }}
       >
         <LockOutlinedIcon
-          sx={{ fontSize: "70px", mt: 4, color: theme.palette.common.black }}
+          sx={{ fontSize: "70px", mt: 4, color: theme.palette.primary.main }}
         />
         <Typography
           variant="h2"
           fontWeight="bold"
-          sx={{ color: theme.palette.common.black, mt: 1 }}
+          sx={{ color: theme.palette.primary.main, mt: 1 }}
         >
           Sign In
         </Typography>
@@ -110,9 +108,9 @@ const Login = () => {
                 color="secondary"
                 sx={{
                   input: {
-                    color: theme.palette.common.black,
+                    color: theme.palette.common.white,
                     "&::placeholder": {
-                      color: theme.palette.grey[300],
+                      color: theme.palette.primary.main,
                     },
                   },
                 }}
@@ -137,7 +135,7 @@ const Login = () => {
                 color="secondary"
                 sx={{
                   input: {
-                    color: theme.palette.common.black,
+                    color: theme.palette.common.white,
                     "&::placeholder": {
                       color: theme.palette.grey[300],
                     },
@@ -159,8 +157,10 @@ const Login = () => {
           >
             Sign In
           </Button>
+          <Typography align="center" color={theme.palette.error.main}>
+            {error && "Invalid Credentials, Please try again!"}
+          </Typography>
         </Box>
-        {error}
       </Box>
     </Container>
   );

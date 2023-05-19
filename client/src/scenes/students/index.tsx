@@ -2,7 +2,7 @@ import { getAllStudents } from "@/api/students.service";
 import Header from "@/components/Header";
 import { StudentColumns } from "@/components/data-grid-columns/students";
 import { Student } from "@/types/student";
-import { Box, useTheme } from "@mui/material";
+import { Box, CircularProgress, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 
@@ -31,15 +31,18 @@ const Students = () => {
           },
         }}
       >
-        {!error && (
-          <DataGrid
-            loading={!students}
-            getRowId={(row) => row.id}
-            rows={students || []}
-            columns={StudentColumns}
-            sx={{ color: theme.palette.grey[300] }}
-          />
-        )}
+        {!error &&
+          (students ? (
+            <DataGrid
+              loading={!students}
+              getRowId={(row) => row.id}
+              rows={students || []}
+              columns={StudentColumns}
+              sx={{ color: theme.palette.grey[300] }}
+            />
+          ) : (
+            <CircularProgress color="secondary" />
+          ))}
       </Box>
     </Box>
   );
