@@ -48,12 +48,12 @@ const gridTemplateSmallScreens =`
  "j"
 `;
 
-const Homepage = () => {
+ const Homepage = () => {
     const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)")
 
     const {palette} = useTheme();
 
-    return <Box width="100&" height="100%" display="grid" gap="1.5rem"
+    return (<Box width="100&" height="100%" display="grid" gap="1.5rem"
     sx={
         isAboveMediumScreens ? {
         gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
@@ -71,7 +71,7 @@ const Homepage = () => {
         <Row3 />
         
         
-    </Box>
+    </Box>);
 }
 
 export default Homepage;
