@@ -8,7 +8,7 @@ type Student struct {
 	FatherName string `json:"fatherName" bson:"fatherName" validate:"required"`
 	MotherName string `json:"motherName" bson:"motherName" validate:"required"`
 	DOB string `json:"dob" bson:"dob" validate:"required"`
-	Gender string `json:"gender" bson:"gender"`
+	Gender string `json:"gender" bson:"gender" validate:"required"`
 	PhoneNumber string `json:"phoneNumber" bson:"phoneNumber" validate:"required"`
 	StreetAddress string `json:"streetAddress" bson:"streetAddress" validate:"required"`
 	City string `json:"city" bson:"city" validate:"required"`

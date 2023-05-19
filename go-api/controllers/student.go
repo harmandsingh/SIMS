@@ -66,15 +66,16 @@ func GetStudent(c * fiber.Ctx) error {
 }
 
 type createStudentDTO struct {
-	Name string `json:"name" bson:"name"`
-	FatherName string `json:"fatherName" bson:"fatherName"`
-	MotherName string `json:"motherName" bson:"motherName"`
-	DOB string `json:"dob" bson:"dob"`
-	PhoneNumber string `json:"phoneNumber" bson:"phoneNumber"`
-	StreetAddress string `json:"streetAddress" bson:"streetAddress"`
-	City string `json:"city" bson:"city"`
-	State string `json:"state" bson:"state"`
-	Country string `json:"country" bson:"country"`
+	Name string `json:"name" bson:"name" validate:"required"`
+	FatherName string `json:"fatherName" bson:"fatherName" validate:"required"`
+	MotherName string `json:"motherName" bson:"motherName" validate:"required"`
+	DOB string `json:"dob" bson:"dob" validate:"required"`
+	Gender string `json:"gender" bson:"gender" validate:"required"`
+	PhoneNumber string `json:"phoneNumber" bson:"phoneNumber" validate:"required"`
+	StreetAddress string `json:"streetAddress" bson:"streetAddress" validate:"required"`
+	City string `json:"city" bson:"city" validate:"required"`
+	State string `json:"state" bson:"state" validate:"required"`
+	Country string `json:"country" bson:"country" validate:"required"`
 }
 
 func CreateStudent(c *fiber.Ctx) error {
