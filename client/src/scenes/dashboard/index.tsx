@@ -16,16 +16,13 @@ import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bar, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import Row1 from "../stats/row1";
+import Row2 from "../stats/row2";
 
 const data = [
   { name: "Boy", value: 400 },
   { name: "Girl", value: 300 },
 ];
-
-import { PieChart, Pie, Sector, Cell, LineChart, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, Legend } from 'recharts';
-import DashboardBox from "@/components/DashboardBox";
-import { attendance } from "@/studentData/data";
-import { Palette } from "@mui/material";
 
 const Dashboard = () => {
   const palette = useTheme();
@@ -58,8 +55,6 @@ const Dashboard = () => {
       .then((result) => setClasses(result))
       .catch((error) => setError(error));
   }, []);
-
-
 
   return (
     <Box m="1.5rem 1.25rem">
@@ -94,13 +89,8 @@ const Dashboard = () => {
           description="Total Class Count"
           icon={ClassIcon}
         />
-      
       </Box>
-<<<<<<< HEAD
-      <BarChartComponent />
-=======
-      
->>>>>>> 47ec293ecabee89934d59822ad92ecf88d6951e1
+      <Box width="100%" height="100%" display="grid" gap="1.5rem"></Box>
     </Box>
   );
 };
