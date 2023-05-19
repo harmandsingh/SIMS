@@ -17,6 +17,7 @@
     "@mui/material": "^5.12.3",
     "@mui/x-data-grid": "^6.3.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/recharts": "^1.8.24",
     "axios": "^1.4.0",
     "dotenv": "^16.0.3",
     "react": "^18.2.0",
@@ -24,6 +25,7 @@
     "react-hook-form": "^7.43.9",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
+    "recharts": "^2.6.2",
     "swr": "^2.1.5",
     "yup": "^1.1.1"
   },
