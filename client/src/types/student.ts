@@ -26,3 +26,7 @@ export interface EnrolledCourses {
 export interface GetStudentsResponse {
   data: Student[];
 }
+
+export interface AddStudentResponse {
+  result: Student;
+}
