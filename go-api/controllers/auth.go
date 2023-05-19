@@ -50,14 +50,14 @@ func Register(c *fiber.Ctx) error{
 	var user models.User
 	err := collection.FindOne(c.Context(), bson.M{"email": newUser.Email}).Decode(&user)
 	if err == nil {
-		c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "user with the given email already exists"})
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "user with the given email already exists"})
 	}
 
 	// Check if the username is already taken
 	newUser.Username = utils.NormalizeUsername(newUser.Username)
 	err = collection.FindOne(c.Context(), bson.M{"username": newUser.Username}).Decode(&user)
 	if err == nil {
-		c.Status(http.StatusBadRequest).JSON(fiber.Map{
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"error": "username already taken",
 		})
 	}
@@ -84,13 +84,14 @@ func Register(c *fiber.Ctx) error{
 
 	// User object to be inserted into the DB
 	userDB := new(models.User)
+	userDB.ID = primitive.NewObjectID();
 	userDB.Username = newUser.Username
 	userDB.Email = newUser.Email
 	userDB.Password = newUser.Password
 
 	result, err := collection.InsertOne(c.Context(), userDB)
 	if err != nil {
-		c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"error": "error creating user",
 			"message": err.Error(),
 		})
