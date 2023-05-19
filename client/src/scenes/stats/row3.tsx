@@ -235,7 +235,7 @@ const Row3 = () => {
       </DashboardBox>
 
       <DashboardBox gridArea="i"></DashboardBox>
-      <DashboardBox gridArea="j"></DashboardBox>
+     
     </>
   );
 };

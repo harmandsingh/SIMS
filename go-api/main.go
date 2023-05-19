@@ -51,6 +51,7 @@ func run() error {
 	routes.AddStudentGroup(app)
 	routes.AddClassGroup(app)
 	routes.AddTeacherGroup(app)
+	routes.AddCourseGroup(app)
 
 	// start server
 	var port string

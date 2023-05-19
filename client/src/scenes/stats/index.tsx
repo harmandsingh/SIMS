@@ -9,13 +9,12 @@ const gridTemplateLargeScreens = `
  "a b c"
  "a b c"
  "a b c"
- "a b f"
- "d e f"
- "d e f"
+ 
+ 
  "d h i"
  "g h i"
- "g h j"
- "g h j"
+ "g h i"
+ "g h i"
 `;
 
 const gridTemplateSmallScreens = `
@@ -72,7 +71,7 @@ const Stats = () => {
       }
     >
       <Row1 />
-      <Row2 />
+     
       <Row3 />
     </Box>
   );
