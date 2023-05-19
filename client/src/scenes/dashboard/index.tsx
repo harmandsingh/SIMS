@@ -15,7 +15,16 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Bar, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Bar,
+  BarChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import Row1 from "../stats/row1";
 import Row2 from "../stats/row2";
 
@@ -90,7 +99,16 @@ const Dashboard = () => {
           icon={ClassIcon}
         />
       </Box>
-      <Box width="100%" height="100%" display="grid" gap="1.5rem"></Box>
+      <>
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart width={600} height={600} data={data}>
+            <Bar dataKey="students" fill={theme.palette.primary.main} />
+            {/* <CartesianGrid stroke={theme.palette.primary.main} /> */}
+            <XAxis dataKey="name" />
+            <YAxis />
+          </BarChart>
+        </ResponsiveContainer>
+      </>
     </Box>
   );
 };

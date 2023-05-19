@@ -93,7 +93,8 @@ const Sidebar = ({
                     </Typography>
                   );
                 }
-                const lcText = item.text.toLowerCase();
+                const lcText = item.text.replace(/\s/g, "").toLowerCase();
+                console.log(lcText);
 
                 return (
                   <ListItem key={item.text} disablePadding>

@@ -9,6 +9,8 @@ import Layout from "./scenes/layout";
 import Stats from "./scenes/stats";
 import Students from "./scenes/students";
 import Teachers from "./scenes/teachers";
+import Attendance from "./scenes/attendance";
+import StudentsInfo from "./scenes/studentsInfo";
 
 export const isAuthenticated = () => {
   if (localStorage.getItem("user")) {
@@ -44,10 +46,12 @@ function App() {
                 />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/students" element={<Students />} />
+                <Route path="/teachers" element={<Teachers />} />
                 <Route path="/classes" element={<Classes />} />
                 <Route path="/courses" element={<Courses />} />
-                <Route path="/teachers" element={<Teachers />} />
                 <Route path="/stats" element={<Stats />} />
+                <Route path="/attendance" element={<Attendance />} />
+                <Route path="/studentsinfo" element={<StudentsInfo />} />
                 <Route path="*" element={<Navigate to="/dashboard" />} />
               </Route>
             </Routes>

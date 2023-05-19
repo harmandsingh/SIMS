@@ -2,7 +2,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 
 type HeaderProps = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 };
 
 const Header = ({ title, subtitle }: HeaderProps) => {
